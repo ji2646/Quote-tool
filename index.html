@@ -1951,7 +1951,7 @@ function renderDistrictDashboard(_targetEl){
         const label=(UID_NAMES[u]||u)+' · '+u;
         return `<button onclick="_perfDashFilter='${u}';refreshDashboard()" style="padding:${isMobile()?'9px 16px':'5px 12px'};border-radius:20px;border:1.5px solid ${_perfDashFilter===u?'var(--g)':'var(--bd)'};background:${_perfDashFilter===u?'var(--g)':'var(--s1)'};color:${_perfDashFilter===u?'#fff':'var(--t2)'};font-family:DM Sans;font-size:${isMobile()?'13px':'10px'};font-weight:800;cursor:pointer;white-space:nowrap">${label}</button>`;
       }).join('')}
-      <button onclick="_perfDashFilter='769';refreshDashboard()" style="padding:${isMobile()?'9px 16px':'5px 12px'};border-radius:20px;border:1.5px solid ${_perfDashFilter==='769'?'var(--g)':'var(--bd)'};background:${_perfDashFilter==='769'?'var(--g)':'var(--s1)'};color:${_perfDashFilter==='769'?'#fff':'var(--t2)'};font-family:DM Sans;font-size:${isMobile()?'13px':'10px'};font-weight:800;cursor:pointer;white-space:nowrap">Memorial (769)</button>
+
     </div>`:'';
 
   // Use filteredReps for all renders below (reps already declared above)
@@ -7702,10 +7702,10 @@ const DSR_MONTHS = [
   {key:'may2026',   label:'May 2026'},
   {key:'april2026', label:'April 2026'},
 ]; // fallback — overwritten by months_fetch on load
-let _dsrActiveMonth    = 'june2026';
+let _dsrActiveMonth    = 'july2026';
 let DSR_DAYS_IN_MONTH  = 31;
-let DSR_MONTH_LABEL    = 'May 2026';
-let DSR_MONTH_KEY      = 'june2026';
+let DSR_MONTH_LABEL    = 'July 2026';
+let DSR_MONTH_KEY      = 'july2026';
 
 // Store goals — all zeroed, populated entirely by goals_fetch from sheet
 const DSR_GOALS = {
