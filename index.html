@@ -729,7 +729,7 @@ html.dark-mode .wchip-past .wlbl{color:#5a5a5a !important}
     </div>
     <span style="font-size:10px;color:#9CA3AF;font-weight:600">Dark</span>
   </div>
-  <div style="position:absolute;bottom:calc(20px + env(safe-area-inset-bottom, 20px));left:0;right:0;text-align:center;font-size:10px;color:#9CA3AF;font-family:'DM Sans',sans-serif;letter-spacing:.5px">V-03JUL2026-A1</div>
+  <div style="position:absolute;bottom:calc(20px + env(safe-area-inset-bottom, 20px));left:0;right:0;text-align:center;font-size:10px;color:#9CA3AF;font-family:'DM Sans',sans-serif;letter-spacing:.5px">V-10JUL2026-A1</div>
 </div>
 
 <script>
@@ -738,20 +738,20 @@ function fmtRawDate(s){ if(!s) return ''; const p=String(s).split('-'); if(p.len
 const ALLOWED_UIDS=[
   'gs0426','ap485d','mg221k','tg4507',
   'jq6635','jv6394','jq286d','cx7250',
-  'bb8326','jx820u','ji2646dm','sc417e','nc3647','ju512j','ec651n',
+  'bb8326','jx820u','ji2646dm','sc417e','ju512j','ec651n',
   'et7967'
 ];
 
 const DISABLED_UIDS=[];
 const QTOOL_DISABLED_UIDS=[];
-const ADMIN_DISABLED_UIDS=['dg8674','rg8855','ec934j']; // account disabled by admin
+const ADMIN_DISABLED_UIDS=['dg8674','rg8855','ec934j','nc3647']; // account disabled by admin
 
 const UID_NAMES={
-  'gs0426':'Gabbisette Sanchez','ap485d':'Alfredo Parra','dg8674':'Dara Gazcon',
+  'gs0426':'Gabbisette Sanchez','ap485d':'Alfredo Parra',
   'mg221k':'Matthew Gomez','tg4507':'Thalia Gonzalez','jq6635':'Jaquelin Sauceda',
   'jv6394':'Joseph Cisneros','sc417e':'Sergio Cardenas','jq286d':'Josue Sosa',
   'cx7250':'Christina Muzquiz','bb8326':'Bryan Barajas',
-  'jx820u':'Jose Manzo','nc3647':'Nancy Cordova','ju512j':'Jonatan Ramirez','ec651n':'Erica Culbert',
+  'jx820u':'Jose Manzo','ju512j':'Jonatan Ramirez','ec651n':'Erica Culbert',
   'ji2646dm':'Josue Garcia','et7967':'Evelyn Tellez',
   'tbd752':'Store 752 (TBD)',
 };
@@ -1095,11 +1095,11 @@ const ACTIVITY_CREDS={
 // Activity store -> rep UIDs
 const STORE_REPS={
   '777':null, // Jaquelin sees all
-  '747':['gs0426','ap485d','dg8674','tg4507'], // Gabbi + Dara + Alfredo + Thalia
+  '747':['gs0426','ap485d','tg4507'],           // Gabbi + Alfredo + Thalia
   '775':['mg221k','ec651n'],                // Matthew + Erica
   '769':['bb8326'],                         // Christina RSM + Bryan RSC
   '752':['jq286d','sc417e'],                // Josue Sosa RSM + Sergio RSC
-  '768':['jx820u','nc3647','ju512j'],       // Jose Manzo + Nancy + Jonatan
+  '768':['jx820u','ju512j'],                // Jose Manzo + Jonatan
   'dm':null,
   'ji2646dm':null
 };
@@ -1109,10 +1109,10 @@ const STORE_REPS={
 // RSM team map for dashboard filter: rsm uid → their reps (including themselves)
 const RSM_TEAM_MAP={
   'jq6635':['jq6635','jv6394','et7967'],           // Jaquelin — store 777: Joseph, Evelyn
-  'gs0426':['gs0426','ap485d','dg8674','tg4507'],
+  'gs0426':['gs0426','ap485d','tg4507'],
   'mg221k':['mg221k','ec651n'],
   'jq286d':['jq286d','sc417e'],                // Josue Sosa RSM + Sergio RSC
-  'jx820u':['jx820u','nc3647','ju512j'],
+  'jx820u':['jx820u','ju512j'],
   'cx7250':['cx7250','bb8326'],                // Christina RSM + Bryan RSC (store 769)
   // tbd752 placeholder removed — jq286d is now RSM for store 752
 };
@@ -1689,13 +1689,13 @@ function loadDistrictDashboard(forceRefresh){
         }
         const isDM=isDMUser(); const isJaq=isJaqUser(); const isRSM=isRSMUser();
         if(Array.isArray(data)&&data.length){
-          if(isDM||isJaq) _perfAllData=data.filter(r=>r.uid&&r.uid!=='ji2646dm'&&r.uid!=='ec934j'&&r.uid!=='ji2646'&&r.uid!=='tbd752');
+          if(isDM||isJaq) _perfAllData=data.filter(r=>r.uid&&r.uid!=='ji2646dm'&&r.uid!=='ec934j'&&r.uid!=='ji2646'&&r.uid!=='dg8674'&&r.uid!=='rg8855'&&r.uid!=='nc3647'&&r.uid!=='tbd752'&&r.uid!=='dg8674'&&r.uid!=='rg8855'&&r.uid!=='nc3647'&&r.uid!=='dg8674'&&r.uid!=='rg8855'&&r.uid!=='nc3647');
           else if(isRSM){
             const myTeam=(RSM_TEAM_MAP[_pendingUid]||STORE_REPS[_activityStore||_pendingUid]||[]).map(u=>u.toLowerCase());
-            _perfAllData=data.filter(r=>r.uid&&myTeam.includes(r.uid.toLowerCase())&&r.uid!=='ec934j'&&r.uid!=='ji2646');
+            _perfAllData=data.filter(r=>r.uid&&myTeam.includes(r.uid.toLowerCase())&&r.uid!=='ec934j'&&r.uid!=='ji2646'&&r.uid!=='dg8674'&&r.uid!=='rg8855'&&r.uid!=='nc3647');
           } else {
             const peers=(STORE_PEER_MAP[_pendingUid]||[]).map(u=>u.toLowerCase());
-            _perfAllData=data.filter(r=>r.uid&&(r.uid===_pendingUid||peers.includes(r.uid.toLowerCase()))&&r.uid!=='ec934j'&&r.uid!=='ji2646');
+            _perfAllData=data.filter(r=>r.uid&&(r.uid===_pendingUid||peers.includes(r.uid.toLowerCase()))&&r.uid!=='ec934j'&&r.uid!=='ji2646'&&r.uid!=='dg8674'&&r.uid!=='rg8855'&&r.uid!=='nc3647');
           }
           // Store the actual perf cycle start — used by tracker submits & fetches
           if(_perfAllData.length&&_perfAllData[0].cycleStart) _perfCurrentCycleStart=_perfAllData[0].cycleStart;
@@ -1730,7 +1730,7 @@ function loadDistrictDashboard(forceRefresh){
           fetchWithTimeout(LOG_URL+'?type=perf_fetch_uid&uid='+encodeURIComponent(uid)+'&_='+Date.now(),{method:'GET',mode:'cors',cache:'no-store'},15000)
             .then(r=>r.json()).catch(()=>null)
         )).then(results=>{
-          _perfAllData=results.filter(r=>r&&r.uid&&r.uid!=='ec934j'&&r.uid!=='ji2646');
+          _perfAllData=results.filter(r=>r&&r.uid&&r.uid!=='ec934j'&&r.uid!=='ji2646'&&r.uid!=='dg8674'&&r.uid!=='rg8855'&&r.uid!=='nc3647');
           if(!_perfRepUid) renderDistrictDashboard();
                 }).catch(()=>{ 
           if(dash2) dash2.innerHTML=`<div style='padding:24px;font-family:DM Sans;font-size:11px;color:var(--err);text-align:center'>Could not load dashboard. Check connection and try again.<br><button onclick="loadDistrictDashboard(true)" style="margin-top:8px;padding:6px 16px;background:var(--g);border:none;border-radius:6px;color:#fff;font-family:DM Sans;font-size:11px;font-weight:800;cursor:pointer">↻ Retry</button></div>`;
@@ -1770,16 +1770,17 @@ function renderDistrictDashboard(_targetEl){
   const isDMd=isDMUser(); const isJaqd=isJaqUser(); const isRSMd=isRSMUser();
   const canSeeAlld=isDMd||isJaqd;
   let _dashReps=reps;
-  // Category filter (from All/RSC/RSM picker chips)
-  if(_perfCategoryFilter==='rsc'){
-    _dashReps=_dashReps.filter(r=>!RSM_UIDS.includes(r.uid));
-  } else if(_perfCategoryFilter==='rsm'){
-    _dashReps=_dashReps.filter(r=>RSM_UIDS.includes(r.uid)&&r.uid!=='ji2646dm');
-  }
-  // Team filter (from district dashboard RSM chips)
+  // Team filter (from district dashboard RSM chips) — applied first
   if(_perfDashFilter!=='all'){
     const teamUids=(RSM_TEAM_MAP[_perfDashFilter]||STORE_REPS[_perfDashFilter]||[]).map(u=>u.toLowerCase());
     _dashReps=_dashReps.filter(r=>teamUids.includes(r.uid.toLowerCase()));
+  } else {
+    // Category filter only applies when showing all reps, not when a specific store is selected
+    if(_perfCategoryFilter==='rsc'){
+      _dashReps=_dashReps.filter(r=>!RSM_UIDS.includes(r.uid));
+    } else if(_perfCategoryFilter==='rsm'){
+      _dashReps=_dashReps.filter(r=>RSM_UIDS.includes(r.uid)&&r.uid!=='ji2646dm');
+    }
   }
 
   const sum=k=>reps.reduce((s,r)=>s+(Number(r[k])||0),0);
@@ -2182,7 +2183,7 @@ function renderPerfBody(){
 
   if(!_perfRepUid){
     // ── PICKER SCREEN ──
-    const allReps=Object.entries(UID_NAMES).filter(([uid])=>uid!=='ji2646dm'&&uid!=='tbd752');
+    const allReps=Object.entries(UID_NAMES).filter(([uid])=>uid!=='ji2646dm'&&uid!=='tbd752'&&uid!=='dg8674'&&uid!=='rg8855'&&uid!=='nc3647');
     const rscReps=allReps.filter(([uid])=>!RSM_UIDS.includes(uid));
     const rsmReps=allReps.filter(([uid])=>RSM_UIDS.includes(uid)&&uid!=='ji2646dm');
     const repList=canSeeAll?((_perfFilter==='rsm'?rsmReps:_perfFilter==='rsc'?rscReps:allReps).sort((a,b)=>a[1].localeCompare(b[1]))):
@@ -2313,13 +2314,13 @@ function loadDistrictDashboardMobile(){
     .then(r=>r.json()).then(data=>{
       const isDM=isDMUser(); const isJaq=isJaqUser(); const isRSM=isRSMUser();
       if(Array.isArray(data)&&data.length){
-        if(isDM||isJaq) _perfAllData=data.filter(r=>r.uid&&r.uid!=='ji2646dm'&&r.uid!=='ec934j'&&r.uid!=='ji2646'&&r.uid!=='tbd752');
+        if(isDM||isJaq) _perfAllData=data.filter(r=>r.uid&&r.uid!=='ji2646dm'&&r.uid!=='ec934j'&&r.uid!=='ji2646'&&r.uid!=='dg8674'&&r.uid!=='rg8855'&&r.uid!=='nc3647'&&r.uid!=='tbd752'&&r.uid!=='dg8674'&&r.uid!=='rg8855'&&r.uid!=='nc3647'&&r.uid!=='dg8674'&&r.uid!=='rg8855'&&r.uid!=='nc3647');
         else if(isRSM){
           const myTeam=(RSM_TEAM_MAP[_pendingUid]||[]).map(u=>u.toLowerCase());
-          _perfAllData=data.filter(r=>r.uid&&myTeam.includes(r.uid.toLowerCase())&&r.uid!=='ec934j'&&r.uid!=='ji2646');
+          _perfAllData=data.filter(r=>r.uid&&myTeam.includes(r.uid.toLowerCase())&&r.uid!=='ec934j'&&r.uid!=='ji2646'&&r.uid!=='dg8674'&&r.uid!=='rg8855'&&r.uid!=='nc3647');
         } else {
           const peers=(STORE_PEER_MAP[_pendingUid]||[]).map(u=>u.toLowerCase());
-          _perfAllData=data.filter(r=>r.uid&&(r.uid===_pendingUid||peers.includes(r.uid.toLowerCase()))&&r.uid!=='ec934j'&&r.uid!=='ji2646');
+          _perfAllData=data.filter(r=>r.uid&&(r.uid===_pendingUid||peers.includes(r.uid.toLowerCase()))&&r.uid!=='ec934j'&&r.uid!=='ji2646'&&r.uid!=='dg8674'&&r.uid!=='rg8855'&&r.uid!=='nc3647');
         }
         if(_perfAllData.length&&_perfAllData[0].cycleStart) _perfCurrentCycleStart=_perfAllData[0].cycleStart;
         loadPerfHistory(()=>renderCyclePicker());
@@ -3240,7 +3241,7 @@ if(typeof showToast==='undefined'){
 </div>
 <header>
   <div class="hlogo">
-    <div><div class="htitle">Quote Tool</div><div class="hsub">Pricing effective 7/3/2026</div></div>
+    <div><div class="htitle">Quote Tool</div><div class="hsub">Pricing effective 7/10/2026</div></div>
   </div>
   <div style="display:flex;align-items:center;gap:8px">
     <button class="hdr-refresh" onclick="location.reload()" title="Reload page" style="padding:8px 10px;cursor:pointer;font-family:\'DM Sans\';font-size:12px;font-weight:700;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></button>
@@ -3425,8 +3426,12 @@ if(typeof showToast==='undefined'){
       <div id="apr-sec" style="display:none">
         <div style="font-size:10px;color:var(--t3);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px">APR</div>
         <div class="apr-row">
-          <div class="apr on" id="apr0" onclick="setAPR(0)"><div class="ar">0%</div><div class="as">Best for customer</div></div>
-          <div class="apr" id="apr14" onclick="setAPR(14.99)"><div class="ar">14.99%</div><div class="as">Alt approval</div></div>
+          <div style="display:flex;align-items:center;gap:10px;width:100%">
+            <span style="font-size:11px;font-weight:800;color:var(--t2);font-family:'DM Sans';white-space:nowrap">APR</span>
+            <input type="range" id="aprSlider" min="9.99" max="34.99" step="5" value="9.99"
+              style="flex:1;accent-color:var(--g);cursor:pointer" oninput="setAPR(parseFloat(this.value))">
+            <span id="aprLabel" style="font-size:13px;font-weight:900;color:var(--g);font-family:'DM Sans';min-width:44px;text-align:right">9.99%</span>
+          </div>
         </div>
       </div>
       <div id="prog-freq-sec" style="margin-top:8px">
@@ -3477,13 +3482,12 @@ const PLANS=[
 // promoReq = plan needed for promo pricing. sw/nw/up = promo price. sw_o/nw_o/up_o = other plan price (null = same as promo / not available)
 const PHONES=[
   // Apple
-  {id:'i13_128', n:'iPhone 13 128GB',      sw:29.99,  nw:99.99,   up:629.99,  sw_o:99.99,  nw_o:199.99, up_o:629.99,  frp:629.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
   {id:'i15_128', n:'iPhone 15 128GB',      sw:349.99, nw:449.99,  up:629.99,  sw_o:449.99, nw_o:549.99, up_o:629.99,  frp:629.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
   {id:'i15_256', n:'iPhone 15 256GB',      sw:729.99, nw:729.99,  up:729.99,  frp:729.99,  brand:'Apple',    promoReq:'any'},
   {id:'i16_128', n:'iPhone 16 128GB',      sw:729.99, nw:729.99,  up:729.99,  frp:729.99,  brand:'Apple',    promoReq:'any'},
   {id:'i16_256', n:'iPhone 16 256GB',      sw:829.99, nw:829.99,  up:829.99,  frp:829.99,  brand:'Apple',    promoReq:'any'},
   {id:'i16_512', n:'iPhone 16 512GB',      sw:1029.99,nw:1029.99, up:1029.99, frp:1029.99, brand:'Apple',    promoReq:'any'},
-  {id:'i16e_128',n:'iPhone 16e 128GB',     sw:79.99,  nw:199.99,  up:599.99,  sw_o:249.99, nw_o:349.99, up_o:599.99,  frp:599.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
+  {id:'i16e_128',n:'iPhone 16e 128GB',     sw:79.99,  nw:249.99,  up:599.99,  sw_o:249.99, nw_o:349.99, up_o:599.99,  frp:599.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
   {id:'i16e_256',n:'iPhone 16e 256GB',     sw:149.99, nw:299.99,  up:699.99,  sw_o:349.99, nw_o:449.99, up_o:699.99,  frp:699.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
   {id:'i16e_512',n:'iPhone 16e 512GB',     sw:349.99, nw:499.99,  up:899.99,  sw_o:499.99, nw_o:599.99, up_o:899.99,  frp:899.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
   {id:'i17e_256',n:'iPhone 17e 256GB',     sw:299.99, nw:399.99,  up:599.99,  sw_o:399.99, nw_o:499.99, up_o:599.99,  frp:599.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
@@ -3502,26 +3506,23 @@ const PHONES=[
   {id:'i17pm_2tb', n:'iPhone 17 Pro Max 2TB', sw:1999.99,nw:1999.99,up:1999.99,frp:1999.99,brand:'Apple',   promoReq:'any'},
   // Samsung
   {id:'a16',    n:'Galaxy A16',            sw:0,      nw:0,       up:79.99,   sw_o:79.99,  nw_o:79.99,  up_o:79.99,   frp:159.99,  brand:'Samsung',  promoReqSw:'supreme', promoReqNw:'supreme', maxLinesNw:4},
-  {id:'a17',    n:'Galaxy A17',            sw:0,      nw:19.99,   up:179.99,  sw_o:109.99, nw_o:109.99, up_o:179.99,  frp:179.99,  brand:'Samsung',  promoReq:'supreme', maxLinesNw:4},
-  {id:'a37',    n:'Galaxy A37',            sw:99.99,  nw:99.99,   up:404.99,  sw_o:199.99, nw_o:199.99, up_o:404.99,  frp:404.99,  brand:'Samsung',  promoReqSw:'supreme', promoReqNw:'supreme', maxLines:4},
-  {id:'a36',    n:'Galaxy A36',            sw:39.99,  nw:79.99,   up:199.99,  sw_o:129.99, nw_o:129.99, up_o:199.99,  frp:359.99,  brand:'Samsung',  promoReq:'supreme', maxLines:4},
+  {id:'a17',    n:'Galaxy A17',            sw:0,      nw:19.99,   up:109.99,  sw_o:109.99, nw_o:109.99, up_o:109.99,  frp:179.99,  brand:'Samsung',  promoReq:'supreme', maxLinesNw:4},
+  {id:'a37',    n:'Galaxy A37',            sw:49.99,  nw:129.99,  up:249.99,  sw_o:199.99, nw_o:199.99, up_o:249.99,  frp:404.99,  brand:'Samsung',  promoReqSw:'supreme', promoReqNw:'supreme', maxLines:4},
   {id:'s25fe',  n:'Galaxy S25 FE',         sw:149.99, nw:149.99,  up:649.99,  sw_o:399.99, nw_o:399.99, up_o:649.99,  frp:649.99,  brand:'Samsung',  promoReq:'supreme', maxLines:4},
   {id:'s25',    n:'Galaxy S25',            sw:360,    nw:360,     up:799.99,  sw_o:499.99, nw_o:499.99, up_o:799.99,  frp:799.99,  brand:'Samsung',  promoReq:'supreme'},
   {id:'s26',    n:'Galaxy S26',            sw:399.99, nw:499.99,  up:899.99,  sw_o:699.99, nw_o:699.99, up_o:899.99,  frp:899.99,  brand:'Samsung',  promoReq:'supreme', maxLines:4},
   {id:'s26u',   n:'Galaxy S26 Ultra',      sw:699.99, nw:899.99,  up:1299.99, sw_o:1099.99,nw_o:1099.99, up_o:1299.99, frp:1299.99, brand:'Samsung',  promoReq:'supreme'},
   // Motorola
   {id:'mgplay', n:'moto g play 2026',      sw:0,      nw:0,       up:139.99,  sw_o:29.99,  nw_o:29.99,  up_o:139.99,  frp:139.99,  brand:'Motorola', promoReq:'smart',   maxLinesNw:4},
-  {id:'mg26',   n:'moto g 2026',           sw:0,      nw:0,       up:79.99,   sw_o:29.99,  nw_o:29.99,  up_o:79.99,   frp:169.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
-  {id:'mgpwr',  n:'moto g power 2026',     sw:19.99,  nw:39.99,   up:109.99,  sw_o:59.99,  nw_o:59.99,  up_o:109.99,  frp:189.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
-  {id:'mgsty',  n:'moto g stylus 2025',    sw:29.99,  nw:29.99,   up:239.99,  sw_o:69.99,  nw_o:69.99,  up_o:239.99,  frp:239.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
-  {id:'medge',  n:'motorola edge 2025',    sw:29.99,  nw:99.99,   up:199.99,  sw_o:129.99, nw_o:199.99, up_o:199.99,  frp:359.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
+  {id:'mg26',   n:'moto g 2026',           sw:0,      nw:0,       up:89.99,   sw_o:29.99,  nw_o:29.99,  up_o:89.99,   frp:169.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
+  {id:'mgpwr',  n:'moto g power 2026',     sw:0,      nw:9.99,    up:199.99,  sw_o:59.99,  nw_o:59.99,  up_o:199.99,  frp:199.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
+  {id:'mgsty',  n:'moto g stylus 2025',    sw:29.99,  nw:39.99,   up:149.99,  sw_o:69.99,  nw_o:69.99,  up_o:149.99,  frp:239.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
+  {id:'medge',  n:'motorola edge 2026',    sw:59.99,  nw:149.99,  up:429.99,  sw_o:129.99, nw_o:199.99, up_o:429.99,  frp:429.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
   {id:'razr',   n:'motorola razr 2025',    sw:149.99, nw:149.99,  up:399.99,  sw_o:399.99, nw_o:399.99, up_o:399.99,  frp:599.99,  brand:'Motorola', promoReq:'supreme', maxLines:4},
   // Cricket
-  {id:'icon',   n:'Icon 2026',             sw:0,      nw:0,       up:104.99,  sw_o:29.99,  nw_o:29.99,  up_o:104.99,  frp:104.99,  brand:'Cricket',  promoReq:'smart',   maxLinesNw:4},
-  {id:'iconp',  n:'Icon Plus 2026',        sw:0,      nw:0,       up:59.99,   sw_o:29.99,  nw_o:29.99,  up_o:59.99,   frp:109.99,  brand:'Cricket',  promoReq:'smart',   maxLinesNw:4},
+  {id:'iconp',  n:'Icon Plus 2026',        sw:0,      nw:0,       up:69.99,   sw_o:29.99,  nw_o:29.99,  up_o:69.99,   frp:109.99,  brand:'Cricket',  promoReq:'smart',   maxLinesNw:4},
   {id:'debs3',  n:'Debut S3',              sw:0,      nw:0,       up:79.99,   sw_o:0,      nw_o:0,      up_o:79.99,   frp:79.99,   brand:'Cricket',  promoReq:'select',  maxLinesNw:4},
   {id:'debtflex', n:'Cricket Debut Flex',    sw:59.99,  nw:59.99,   up:79.99,   sw_o:59.99,  nw_o:59.99,  up_o:79.99,   frp:79.99,   brand:'Cricket',  promoReq:'any'},
-  {id:'iconpr', n:'Icon Pro 2026',         sw:0,      nw:0,       up:124.99,  sw_o:29.99,  nw_o:29.99,  up_o:124.99,  frp:124.99,  brand:'Cricket',  promoReq:'smart',   maxLinesNw:4},
 ];
 
 const WATCHES=[
@@ -3551,7 +3552,7 @@ const SD_PLANS=[
 // ============================================================
 // STATE
 // ============================================================
-let S={acct:'new',plan:'supreme',ap:true,aalPlan:'supreme',aalLines:1,txnType:'aal',apoPerDevice:0,apoFin:false,apoSplit:false,apoLeaseAmt:0,finOn:false,finType:'prog',breadAPR:0,progFreq:'monthly',lines:[],nid:1};
+let S={acct:'new',plan:'supreme',ap:true,aalPlan:'supreme',aalLines:1,txnType:'aal',apoPerDevice:0,apoFin:false,apoSplit:false,apoLeaseAmt:0,finOn:false,finType:'prog',breadAPR:9.99,progFreq:'monthly',lines:[],nid:1};
 
 // ============================================================
 // HELPERS
@@ -4182,8 +4183,8 @@ function setProgFreq(f){
 }
 function setAPR(r){
   S.breadAPR=r;
-  $('apr0').classList.toggle('on',r===0);
-  $('apr14').classList.toggle('on',r===14.99);
+  const sl=$('aprSlider'); if(sl) sl.value=r;
+  const lb=$('aprLabel'); if(lb) lb.textContent=r.toFixed(2)+'%';
   update();
 }
 
@@ -4369,7 +4370,7 @@ function renderDealStrip(){
   $('deal-strip').innerHTML=`
     <div class="deal-card iphone" onclick="launchDeal('iphone')">
       <div class="deal-tag">📱 iPhone Deals</div>
-      ${devPick('iphone',[{id:'i16e_128',lbl:'iPhone 16e'},{id:'i15_128',lbl:'iPhone 15'},{id:'i13_128',lbl:'iPhone 13'}])}
+      ${devPick('iphone',[{id:'i16e_128',lbl:'iPhone 16e'},{id:'i15_128',lbl:'iPhone 15'}])}
       ${ltRow3('iphone',['var(--warn)',gc,'var(--indigo)'])}
       <div class="deal-price" style="color:${ltColor(c1.lt)}">${fmt(Math.round(c1otd*100)/100)}</div>
       <div class="deal-sub">Supreme UNL · ${c1.lt==='upgrade'?'$90':'$45'} APD · Protect</div>
@@ -4432,7 +4433,7 @@ function renderDealStrip(){
 
 function resetAll(){
   if(_sessionQuote) _sessionQuote+=('|[R]|'); _lastQuoteStr='';
-  S={acct:'new',plan:'supreme',ap:true,aalPlan:'supreme',aalLines:1,txnType:'aal',apoPerDevice:0,apoFin:false,apoSplit:false,apoLeaseAmt:0,finOn:false,finType:'prog',breadAPR:0,progFreq:'monthly',lines:[],nid:1};
+  S={acct:'new',plan:'supreme',ap:true,aalPlan:'supreme',aalLines:1,txnType:'aal',apoPerDevice:0,apoFin:false,apoSplit:false,apoLeaseAmt:0,finOn:false,finType:'prog',breadAPR:9.99,progFreq:'monthly',lines:[],nid:1};
   const _rb=$('btn-new'),_ra=$('btn-aal');
   if(_rb)_rb.classList.add('active');
   if(_ra)_ra.classList.remove('active');
@@ -4656,8 +4657,7 @@ function calc(){
     progPayment=roundedPayment;
     progLastPayment=+(progTotal-(roundedPayment*(divisor-1))).toFixed(2);
     breadTotal=finBase*(1+TAX);
-    if(S.breadAPR===0){breadMo=breadTotal/24;}
-    else{const r=S.breadAPR/100/12;breadMo=breadTotal*r*Math.pow(1+r,24)/(Math.pow(1+r,24)-1);}
+    {const r=S.breadAPR/100/12;breadMo=r>0?breadTotal*r*Math.pow(1+r,24)/(Math.pow(1+r,24)-1):breadTotal/24;}
   }
 
   // Watch incentives — new purchased watches only (not BYOD, not upgrades)
@@ -4843,12 +4843,12 @@ function update(){
       approvalSub.textContent='Pre-tax · 90-Day Cost: '+fmt(finBase*(1+PROG_FEE));
     } else {
       const breadTotal=c.breadTotal||finBase*(1+TAX);
-      const r=14.99/100/12;
+      const r=(S&&S.breadAPR||9.99)/100/12;
       const bread14Mo=Math.ceil(breadTotal*r*Math.pow(1+r,24)/(Math.pow(1+r,24)-1)*100)/100;
       const bread14Total=Math.round(bread14Mo*24*100)/100;
-      const approvalAmt2=S.breadAPR===0?breadTotal:bread14Total;
+      const approvalAmt2=breadTotal;
       approvalAmt.textContent=fmt(approvalAmt2);
-      approvalSub.textContent='Incl. tax · '+(S.breadAPR===0?'0%':'14.99%')+' APR · 24 months';
+      approvalSub.textContent='Incl. tax · '+S.breadAPR.toFixed(2)+'% APR · 24 months';
     }
   } else if(approvalDisp){
     approvalDisp.style.display='none';
@@ -4939,7 +4939,7 @@ function renderSummary(c){
       <div class="sr"><span class="sl">10% lease fee + 8.25% tax</span><span class="sv o">+${fmt(c.progFeeAmt)}</span></div>
       <div class="sr"><span class="sl">Total lease amount</span><span class="sv">${fmt(c.progTotal)}</span></div>`;
     } else {
-      const aprLbl=S.breadAPR===0?'0% APR · 24 months':'14.99% APR · 24 months';
+      const aprLbl=S.breadAPR.toFixed(2)+'% APR · 24 months';
       pppHtml=`<div class="ppp-card bread">
         <div class="ppp-lbl">Bread Pay · ${aprLbl}</div>
         <div class="ppp-val">${fmtMo(c.breadMo)}</div>
@@ -5012,7 +5012,7 @@ function renderSummary(c){
 // ============================================================
 // DM CARD
 // ============================================================
-const ID_CHECK_DEVS=['i13_128','i13_256','i13_512','i15_128','i16e_128','i16e_256','i16e_512','i17e_256','i17e_512'];
+const ID_CHECK_DEVS=['i15_128','i16e_128','i16e_256','i16e_512','i17e_256','i17e_512'];
 
 function dmDevSummary(voiceLines){
   const dc={};
@@ -5313,7 +5313,7 @@ function showDMCard(){
 
       // Bread
       const bread0Mo=Math.ceil(fbWithTax/24*100)/100;
-      const r=14.99/100/12;
+      const r=(S&&S.breadAPR||9.99)/100/12;
       const bread14Mo=Math.ceil(fbWithTax*r*Math.pow(1+r,24)/(Math.pow(1+r,24)-1)*100)/100;
       const bread0Total=Math.round(fbWithTax*100)/100;
       const bread14Total=Math.round(bread14Mo*24*100)/100;
@@ -5338,14 +5338,13 @@ function showDMCard(){
           <!-- Bread: 2 columns -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
             <div style="${tileStyle('#3b82f6')}">
-              ${lbl('Bread Pay 0% APR','#3b82f6')}
+              ${lbl('Bread Pay '+S.breadAPR.toFixed(2)+'% APR','#3b82f6')}
               ${val('$'+bread0Mo.toFixed(2)+'/mo')}
               ${sub2('Approval Needed: '+fmt(fbWithTax)+'<br>24-Month Cost: '+fmt(bread0Total)+'<br>Est. tax: '+fmt(fbTax)+' (8.25%)<br>APR: 0%')}
             </div>
             <div style="${tileStyle('#6366f1')}">
-              ${lbl('Bread Pay 14.99% APR','#8b5cf6')}
+              
               ${val('$'+bread14Mo.toFixed(2)+'/mo')}
-              ${sub2('Approval Needed: '+fmt(bread14Total)+'<br>24-Month Cost: '+fmt(bread14Total)+'<br>Est. tax: '+fmt(fbTax)+' (8.25%)<br>APR: 14.99%')}
             </div>
           </div>
         </div>`;
@@ -5512,11 +5511,11 @@ function copyDMCard(){
     const progMo=Math.ceil(fb*(1+PROG_FEE)/3*100)/100;
     const bt0=fb*(1+TAX);
     const bread0=Math.ceil(bt0/24*100)/100;
-    const r=14.99/100/12;
+    const r=(S&&S.breadAPR||9.99)/100/12;
     const bread14=Math.ceil(bt0*r*Math.pow(1+r,24)/(Math.pow(1+r,24)-1)*100)/100;
     txt+=`Progressive: $${progMo.toFixed(2)}/mo x3\n`;
     txt+=`Bread 0%: $${bread0.toFixed(2)}/mo x24\n`;
-    txt+=`Bread 14.99%: $${bread14.toFixed(2)}/mo x24\n`;
+    txt+=`Bread ${S.breadAPR.toFixed(2)}%: $${breadMo.toFixed(2)}/mo x24\n`;
   }
   if(apoTotal+skeiwatchTotal>0) txt+=`Accessories: ${fmt(apoTotal+skeiwatchTotal)}\n`;
   if(hasProtect) txt+=`Protect: Included\n`;
