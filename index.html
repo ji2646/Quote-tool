@@ -729,7 +729,7 @@ html.dark-mode .wchip-past .wlbl{color:#5a5a5a !important}
     </div>
     <span style="font-size:10px;color:#9CA3AF;font-weight:600">Dark</span>
   </div>
-  <div style="position:absolute;bottom:calc(20px + env(safe-area-inset-bottom, 20px));left:0;right:0;text-align:center;font-size:10px;color:#9CA3AF;font-family:'DM Sans',sans-serif;letter-spacing:.5px">V-10JUL2026-A1</div>
+  <div style="position:absolute;bottom:calc(20px + env(safe-area-inset-bottom, 20px));left:0;right:0;text-align:center;font-size:10px;color:#9CA3AF;font-family:'DM Sans',sans-serif;letter-spacing:.5px">V-29JUL2026-A1</div>
 </div>
 
 <script>
@@ -879,7 +879,12 @@ function resetSessionTimer(){
         <div style="font-size:18px;font-weight:800;color:var(--t1);margin-bottom:8px">Session Expired</div>
         <div style="font-size:12px;color:#4B5563;margin-bottom:24px">Logged out after 10 minutes of inactivity</div>
         <button onclick="location.reload()" style="padding:12px 32px;background:#00a94f;border:none;border-radius:8px;color:#fff;font-family:'DM Sans';font-size:13px;font-weight:900;cursor:pointer">Sign In Again</button>
-      </div>`);
+      </div>
+      <div style="background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3);border-radius:4px;padding:3px 4px;display:flex;align-items:center;gap:4px">
+        <div style="font-size:6px;font-weight:900;color:#60a5fa;letter-spacing:.3px;white-space:nowrap;line-height:1.2">BREAD<br>AKTIVATE</div>
+        <div style="font-family:'Bebas Neue';font-size:13px;color:#60a5fa;line-height:1">$${breadMo}/mo</div>
+      </div>
+    </div>`);
     setTimeout(()=>location.reload(), 30000);
   }, 10*60*1000);
 }
@@ -1612,7 +1617,7 @@ function switchToCycle(cycleStart){
     if(!cycle) return;
     const isDMv=isDMUser(); const isJaqv=isJaqUser(); const isRSMv=isRSMUser();
     let reps=cycle.reps;
-    if(isDMv||isJaqv) reps=reps.filter(r=>r.uid&&r.uid!=='ji2646dm'&&r.uid!=='ji2646'&&r.uid!=='ec934j');
+    if(isDMv||isJaqv) reps=reps.filter(r=>r.uid&&r.uid!=='ji2646dm'&&r.uid!=='ji2646'&&r.uid!=='ec934j'&&r.uid!=='rg8855'&&r.uid!=='dg8674'&&r.uid!=='nc3647');
     else if(isRSMv){ const t=(RSM_TEAM_MAP[_pendingUid]||[]).map(u=>u.toLowerCase()); reps=reps.filter(r=>r.uid&&t.includes(r.uid.toLowerCase())); }
     else { const peers=(STORE_PEER_MAP[_pendingUid]||[]).map(u=>u.toLowerCase()); reps=reps.filter(r=>r.uid&&(r.uid===_pendingUid||peers.includes(r.uid.toLowerCase()))); }
     _perfAllData=reps;
@@ -2043,15 +2048,15 @@ function renderDistrictDashboard(_targetEl){
         const ildRate=Math.round((r.ildRate||0)*100);
         const upgPlusRate=Math.round((r.upgPlusRate||0)*100);
         const ildCol=ildRate>=2?'var(--g)':ildRate>=1?'var(--warn)':'var(--err)';
-        const upgCol=upgPlusRate>=8?'var(--g)':upgPlusRate>=4?'var(--warn)':'var(--err)';
+        const upgCol=upgPlusRate>=20?'var(--g)':upgPlusRate>=10?'var(--warn)':'var(--err)';
         const protCol=prot>=50?'var(--g)':prot>=40?'var(--warn)':'var(--err)';
         const ildBarW=Math.min(100,Math.round(ildRate/2*100));
-        const upgBarW=Math.min(100,Math.round(upgPlusRate/8*100));
+        const upgBarW=Math.min(100,Math.round(upgPlusRate/20*100));
         const protBarW=Math.min(100,prot);
         return `<div style="margin-bottom:${mob?24:16}px;cursor:pointer;padding-bottom:${mob?16:10}px;border-bottom:1px solid var(--bd)" onclick="selectPerfRep('${r.uid}')">
           <div style="font-size:${nameSz}px;font-weight:800;color:var(--t1);font-family:DM Sans;margin-bottom:${mob?10:6}px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${fullName(r.uid)} <span style="font-weight:400;color:var(--t3);font-size:${mob?12:9}px">${r.uid}</span></div>
           ${fRow('ILD',ildBarW,ildCol,ildRate+'%','Goal: 2%','var(--t3)')}
-          ${fRow('Upgrade Plus',upgBarW,upgCol,upgPlusRate+'%','Goal: 8%','var(--t3)')}
+          ${fRow('Upgrade Plus',upgBarW,upgCol,upgPlusRate+'%','Goal: 20%','var(--t3)')}
           ${fRow('Protect',protBarW,protCol,prot+'%','Goal: 50%','var(--t3)')}
         </div>`;
       }).join('');
@@ -2591,7 +2596,7 @@ function renderIndividualDashboard(r,uid,_targetEl){
       ${sec('60RP Mix',gauge(r.mix60rp,0.80),MD)}
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;align-items:stretch">
-      ${sec('Upgrade Plus',gauge(r.upgPlusRate||0,0.08),MD)}
+      ${sec('Upgrade Plus',gauge(r.upgPlusRate||0,0.20),MD)}
       ${sec('Intl. Long Distance',gauge(r.ildRate||0,0.02),MD)}
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;align-items:stretch">
@@ -2793,7 +2798,7 @@ function renderRepCardView(body, r, uid, cycleLabel, throughLabel, _payHtml){
     </div>
     <!-- Row 3b: Upgrade Plus | ILD -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;align-items:stretch">
-      ${sec('Upgrade Plus',gauge('Upgrade Plus Rate',r.upgPlusRate||0,0.08,null),MD)}
+      ${sec('Upgrade Plus',gauge('Upgrade Plus Rate',r.upgPlusRate||0,0.20,null),MD)}
       ${sec('Intl. Long Distance',gauge('ILD Rate',r.ildRate||0,0.02,null),MD)}
     </div>
     <!-- Row 4: Bill Pay | Acc Revenue -->
@@ -2956,7 +2961,7 @@ function renderPerfView(uid,_targetBody){
 
   // Payout visibility: RSC can only see their own payout. RSM sees their team. DM/Jaq see all.
   const isRSCViewingTeammate=(isRSC&&uid!==_pendingUid);
-  const showPayout=!isRSCViewingTeammate;
+  const showPayout=false; // payout estimate removed
   const mob2=isMobile();
   const _payHtml=showPayout?`
     <div style="background:var(--s1);border:1.5px solid var(--bd);border-radius:var(--r);overflow:hidden;margin-top:4px">
@@ -3241,7 +3246,7 @@ if(typeof showToast==='undefined'){
 </div>
 <header>
   <div class="hlogo">
-    <div><div class="htitle">Quote Tool</div><div class="hsub">Pricing effective 7/10/2026</div></div>
+    <div><div class="htitle">Quote Tool</div><div class="hsub">Pricing effective 7/29/2026</div></div>
   </div>
   <div style="display:flex;align-items:center;gap:8px">
     <button class="hdr-refresh" onclick="location.reload()" title="Reload page" style="padding:8px 10px;cursor:pointer;font-family:\'DM Sans\';font-size:12px;font-weight:700;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></button>
@@ -3259,7 +3264,7 @@ if(typeof showToast==='undefined'){
     <div id="deal-global-toggle" style="display:inline-flex;gap:0;border:1px solid var(--bd2);border-radius:20px;overflow:hidden"></div>
   </div>
   <div class="deal-strip" id="deal-strip"></div>
-  <div style="font-size:8px;color:var(--t3);text-align:center;padding:4px 0 2px;letter-spacing:.3px">* All pricing shown for base models · Prog shown at 90-day lease (monthly) · Bread shown at $0 APR · Subject to approval · APD: cases · screens · cables · chargers · power banks</div>
+  <div style="font-size:8px;color:var(--t3);text-align:center;padding:4px 0 2px;letter-spacing:.3px">* All pricing shown for base models · Prog shown at 90-day lease (monthly) · Bread Pay: 14.99% APR · 12 mo · apply via Aktivate · APD: cases · screens · cables · chargers · power banks</div>
 </div>
 
 
@@ -3421,16 +3426,28 @@ if(typeof showToast==='undefined'){
     <div id="fin-opts" style="display:none">
       <div class="fin-types">
         <div class="ftype prog on" id="ft-prog" onclick="setFinType('prog')"><div class="fn">Progressive</div><div class="fd">$49.99 today · 10% lease fee + 8.25% tax · No credit check · Flexible payoff</div></div>
-        <div class="ftype bread" id="ft-bread" onclick="setFinType('bread')"><div class="fn">Bread Pay</div><div class="fd">$0 down · Finances incl. tax · 24 months</div></div>
+        <div class="ftype bread" id="ft-bread" onclick="setFinType('bread')"><div class="fn">Bread Pay</div><div class="fd">Apply via Aktivate · Updated terms include variable APR and flexible term lengths.</div></div>
       </div>
       <div id="apr-sec" style="display:none">
-        <div style="font-size:10px;color:var(--t3);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px">APR</div>
-        <div class="apr-row">
-          <div style="display:flex;align-items:center;gap:10px;width:100%">
-            <span style="font-size:11px;font-weight:800;color:var(--t2);font-family:'DM Sans';white-space:nowrap">APR</span>
+        <div style="margin-bottom:10px">
+          <div style="font-size:10px;color:var(--t3);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">APR Rate</div>
+          <div style="display:flex;align-items:center;gap:8px">
             <input type="range" id="aprSlider" min="9.99" max="34.99" step="5" value="9.99"
-              style="flex:1;accent-color:var(--g);cursor:pointer" oninput="setAPR(parseFloat(this.value))">
-            <span id="aprLabel" style="font-size:13px;font-weight:900;color:var(--g);font-family:'DM Sans';min-width:44px;text-align:right">9.99%</span>
+              style="flex:1;accent-color:var(--g);cursor:pointer;height:4px" oninput="setAPR(parseFloat(this.value))">
+            <div style="display:flex;align-items:center;gap:4px;flex-shrink:0">
+              <input type="number" id="aprInput" value="9.99" min="0" max="99.99" step="0.01"
+                style="width:54px;font-size:13px;font-weight:800;color:var(--g);border:1.5px solid var(--bd);border-radius:6px;padding:4px 6px;font-family:'DM Sans';text-align:center;background:var(--s2)"
+                oninput="setAPR(parseFloat(this.value)||9.99)">
+              <span style="font-size:12px;font-weight:700;color:var(--t3)">%</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--t3);font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Term</div>
+          <div class="apr-row">
+            <div id="bm-6"  class="apr" onclick="setBreadMonths(6)"><div class="ar">6 mo</div><div class="as">6 payments</div></div>
+            <div id="bm-12" class="apr" onclick="setBreadMonths(12)"><div class="ar">12 mo</div><div class="as">12 payments</div></div>
+            <div id="bm-24" class="apr on" onclick="setBreadMonths(24)"><div class="ar">24 mo</div><div class="as">24 payments</div></div>
           </div>
         </div>
       </div>
@@ -3506,11 +3523,11 @@ const PHONES=[
   {id:'i17pm_2tb', n:'iPhone 17 Pro Max 2TB', sw:1999.99,nw:1999.99,up:1999.99,frp:1999.99,brand:'Apple',   promoReq:'any'},
   // Samsung
   {id:'a16',    n:'Galaxy A16',            sw:0,      nw:0,       up:79.99,   sw_o:79.99,  nw_o:79.99,  up_o:79.99,   frp:159.99,  brand:'Samsung',  promoReqSw:'supreme', promoReqNw:'supreme', maxLinesNw:4},
-  {id:'a17',    n:'Galaxy A17',            sw:0,      nw:19.99,   up:109.99,  sw_o:109.99, nw_o:109.99, up_o:109.99,  frp:179.99,  brand:'Samsung',  promoReq:'supreme', maxLinesNw:4},
-  {id:'a37',    n:'Galaxy A37',            sw:49.99,  nw:129.99,  up:249.99,  sw_o:199.99, nw_o:199.99, up_o:249.99,  frp:404.99,  brand:'Samsung',  promoReqSw:'supreme', promoReqNw:'supreme', maxLines:4},
+  {id:'a17',    n:'Galaxy A17',            sw:0,      nw:0,       up:109.99,  sw_o:109.99, nw_o:109.99, up_o:109.99,  frp:179.99,  brand:'Samsung',  promoReq:'supreme', maxLinesNw:4},
+  {id:'a37',    n:'Galaxy A37',            sw:0,      nw:49.99,   up:249.99,  sw_o:199.99, nw_o:199.99, up_o:249.99,  frp:404.99,  brand:'Samsung',  promoReqSw:'supreme', promoReqNw:'supreme', maxLines:4},
   {id:'s25fe',  n:'Galaxy S25 FE',         sw:149.99, nw:199.99,  up:649.99,  sw_o:399.99, nw_o:399.99, up_o:649.99,  frp:649.99,  brand:'Samsung',  promoReq:'supreme', maxLines:4},
   {id:'s25',    n:'Galaxy S25',            sw:360,    nw:360,     up:799.99,  sw_o:499.99, nw_o:499.99, up_o:799.99,  frp:799.99,  brand:'Samsung',  promoReq:'supreme'},
-  {id:'s26',    n:'Galaxy S26',            sw:399.99, nw:499.99,  up:899.99,  sw_o:699.99, nw_o:699.99, up_o:899.99,  frp:899.99,  brand:'Samsung',  promoReq:'supreme', maxLines:4},
+  {id:'s26',    n:'Galaxy S26',            sw:299.99, nw:499.99,  up:899.99,  sw_o:699.99, nw_o:699.99, up_o:899.99,  frp:899.99,  brand:'Samsung',  promoReq:'supreme', maxLines:4},
   {id:'s26u',   n:'Galaxy S26 Ultra',      sw:699.99, nw:899.99,  up:1299.99, sw_o:1099.99,nw_o:1099.99, up_o:1299.99, frp:1299.99, brand:'Samsung',  promoReq:'supreme'},
   // Motorola
   {id:'mgplay', n:'moto g play 2026',      sw:0,      nw:0,       up:139.99,  sw_o:29.99,  nw_o:29.99,  up_o:139.99,  frp:139.99,  brand:'Motorola', promoReq:'smart',   maxLinesNw:4},
@@ -3552,7 +3569,7 @@ const SD_PLANS=[
 // ============================================================
 // STATE
 // ============================================================
-let S={acct:'new',plan:'supreme',ap:true,aalPlan:'supreme',aalLines:1,txnType:'aal',apoPerDevice:0,apoFin:false,apoSplit:false,apoLeaseAmt:0,finOn:false,finType:'prog',breadAPR:9.99,progFreq:'monthly',lines:[],nid:1};
+let S={acct:'new',plan:'supreme',ap:true,aalPlan:'supreme',aalLines:1,txnType:'aal',apoPerDevice:0,apoFin:false,apoSplit:false,apoLeaseAmt:0,finOn:false,finType:'prog',breadAPR:9.99,breadMonths:24,progFreq:'monthly',lines:[],nid:1};
 
 // ============================================================
 // HELPERS
@@ -4182,9 +4199,16 @@ function setProgFreq(f){
   update();
 }
 function setAPR(r){
-  S.breadAPR=r;
-  const sl=$('aprSlider'); if(sl) sl.value=r;
-  const lb=$('aprLabel'); if(lb) lb.textContent=r.toFixed(2)+'%';
+  S.breadAPR=parseFloat(r)||9.99;
+  const sl=$('aprSlider'); if(sl) sl.value=S.breadAPR;
+  const inp=$('aprInput'); if(inp) inp.value=S.breadAPR.toFixed(2);
+  const lb=$('aprLabel'); if(lb) lb.textContent=S.breadAPR.toFixed(2)+'%';
+  update();
+}
+function setBreadMonths(m){
+  S.breadMonths=parseInt(m)||24;
+  ['6','12','24'].forEach(v=>{ const b=$('bm-'+v); if(b) b.classList.toggle('on',S.breadMonths===parseInt(v)); });
+  update();
   update();
 }
 
@@ -4198,7 +4222,7 @@ let _DL = {
   a36:      {lt:'switcher', dev:'a36'},          // card 3: A36/edge/stylus
   hiend:    {lt:'switcher', dev:'s25'},          // card 4: Razr/S25/S25 FE
   budget:   {lt:'new',      dev:'a16'},          // card 5: A16 new preselected (picker: mg26/a16/a17)
-  select:   {lt:'switcher', dev:'mgplay'}        // card 6: Select UNL with picker
+  select:   {lt:'switcher', dev:'a16', plan:'select'}  // card 6: Budget New Line
 };
 let _dealGlobalLt=null; // null = individual, 'switcher'/'new'/'upgrade' = all locked
 let _dealSelAp=true;
@@ -4211,6 +4235,7 @@ function ltColor(lt){
 }
 function setDealLt(card, lt){ _DL[card].lt=lt; _dealGlobalLt=null; renderDealStrip(); }
 function setDealDev(card, dev){ _DL[card].dev=dev; renderDealStrip(); }
+function setDealPlan(card, plan){ _DL[card].plan=plan; renderDealStrip(); }
 function setDealGlobalLt(lt){
   _dealGlobalLt=lt;
   // Apply to all cards except select (SW/NEW only)
@@ -4281,7 +4306,7 @@ function renderDealStrip(){
 
   // ── Card 1: iPhone 13 / 16e / 15 ──
   const c1=_DL.iphone, c1ph=PHONES.find(p=>p.id===c1.dev);
-  const c1apo=c1.lt==='upgrade'?90:45;
+  const c1apo=c1.lt==='upgrade'?90:50;
   const c1prot=protectCost(c1ph?c1ph.frp:0);
   const c1pr=c1ph?(c1.lt==='upgrade'?c1ph.up:c1.lt==='switcher'?c1ph.sw:c1ph.nw):0;
   const c1plan=c1.lt==='upgrade'?0:sup.lines[0];
@@ -4300,7 +4325,7 @@ function renderDealStrip(){
 
   // ── Card 3: A36 / moto edge / moto stylus ──
   const c3=_DL.a36, c3ph=PHONES.find(p=>p.id===c3.dev);
-  const c3apo=c3.lt==='upgrade'?90:45;
+  const c3apo=c3.lt==='upgrade'?90:50;
   const c3prot=protectCost(c3ph?c3ph.frp:0);
   const c3pr=c3ph?(c3.lt==='upgrade'?c3ph.up:c3.lt==='switcher'?c3ph.sw:c3ph.nw):0;
   const c3plan=c3.lt==='upgrade'?0:sup.lines[0];
@@ -4318,7 +4343,7 @@ function renderDealStrip(){
 
   // ── Card 5: G Play / A16 / A17 ──
   const c5=_DL.budget, c5ph=PHONES.find(p=>p.id===c5.dev);
-  const c5apo=c5.lt==='upgrade'?60:45;
+  const c5apo=c5.lt==='upgrade'?60:50;
   const c5prot=protectCost(c5ph?c5ph.frp:0);
   const c5pr=c5ph?(c5.lt==='upgrade'?c5ph.up:c5.lt==='switcher'?c5ph.sw:c5ph.nw):0;
   const c5reqPlanIdSw=(c5ph&&c5ph.promoReqSw)||'smart';
@@ -4329,30 +4354,41 @@ function renderDealStrip(){
   const c5tax=(c5pr+c5apo+ACT_FEE)*TAX;
   const c5otd=c5pr+c5planCost+c5apo+ACT_FEE+c5prot+c5tax;
 
-  // ── Card 6: Select UNL with picker (g play / Icon 2026 / Icon Plus) ──
+  // ── Card 6: Budget New Line ──
+  // Follows exact same rules as c1-c5:
+  // - planCost = full plan price (no AP discount — AP only applies to monthly bill 2+)
+  // - device price = promo price if plan meets promoReq, otherwise other-plan price (sw_o/nw_o)
+  // - APO = $45 (same as c3/c5 budget tier)
+  // - tax = (device + APO + ACT_FEE) * TAX
   const c6=_DL.select;
-  const c6isSW=c6.lt==='switcher';
   const c6ph=PHONES.find(p=>p.id===c6.dev);
-  const c6pr=c6ph?(c6isSW?(c6ph.sw_o??c6ph.sw):(c6ph.nw_o??c6ph.nw)):0;
+  const c6planId=c6.plan==='smart'?'smart':'select';
+  const c6planObj=PLANS.find(p=>p.id===c6planId)||sel;
+  const c6planCost=c6planObj?c6planObj.lines[0]:40;
   const c6prot=protectCost(c6ph?c6ph.frp:0);
+  // Check promoReq: if selected plan doesn't meet device minimum, use other-plan price
+  const _PRANK={supreme:4,smart:3,select:2,'simp tab':1,any:0};
+  const c6req=(c6.lt==='switcher'?(c6ph&&(c6ph.promoReqSw||c6ph.promoReq)):(c6ph&&(c6ph.promoReqNw||c6ph.promoReq)))||'any';
+  const c6planMeets=!c6req||c6req==='any'||(_PRANK[c6planId]||0)>=(_PRANK[c6req]||0);
+  const c6pr=c6ph?(c6.lt==='upgrade'?c6ph.up:c6.lt==='switcher'?(c6planMeets?c6ph.sw:(c6ph.sw_o??c6ph.sw)):(c6planMeets?c6ph.nw:(c6ph.nw_o??c6ph.nw))):0;
   const c6tax=(c6pr+ACT_FEE)*TAX;
-  const c6otd=c6pr+sel.lines[0]+ACT_FEE+c6prot+c6tax;
-  const c6name=c6ph?c6ph.n.replace(/^(Cricket |motorola |Motorola )/i,''):'-';
+  const c6otd=c6pr+c6planCost+ACT_FEE+c6prot+c6tax;
+  const c6name=c6ph?c6ph.n.replace(/^(Cricket |motorola |Motorola |Samsung )/i,''):'-';
 
-  // PPP helper — prog weekly and bread 0% for a given device price + APD
+  // PPP helper — prog weekly and bread 9.99% for a given device price + APD
   const pppSub=(devPr, apo)=>{
     const base=devPr+apo;
     if(base<149.99) return '';
     const prog90=base*(1+PROG_FEE);
     const progMo=Math.ceil(prog90/3*100)/100;
-    const breadMo=Math.ceil(base*(1+TAX)/24*100)/100;
+    const bm=12;const bAPR=14.99;const bR=bAPR/100/12;const breadMo=Math.ceil((base*(1+TAX)*bR*Math.pow(1+bR,bm)/(Math.pow(1+bR,bm)-1))*100)/100;
     return `<div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:4px">
       <div style="background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:4px;padding:3px 4px;display:flex;align-items:center;gap:4px">
         <div style="font-size:6px;font-weight:900;color:#f97316;letter-spacing:.3px;white-space:nowrap">PROG</div>
         <div style="font-family:'Bebas Neue';font-size:13px;color:#f97316;line-height:1">${fmt(progMo)}/mo</div>
       </div>
       <div style="background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3);border-radius:4px;padding:3px 4px;display:flex;align-items:center;gap:4px">
-        <div style="font-size:6px;font-weight:900;color:#60a5fa;letter-spacing:.3px;white-space:nowrap">BREAD</div>
+        <div style="font-size:6px;font-weight:900;color:#60a5fa;letter-spacing:.3px;white-space:nowrap;line-height:1.2">BREAD<br>14.99%·12mo</div>
         <div style="font-family:'Bebas Neue';font-size:13px;color:#60a5fa;line-height:1">$${breadMo}/mo</div>
       </div>
     </div>`;
@@ -4390,7 +4426,7 @@ function renderDealStrip(){
     </div>
     <div class="deal-card android" onclick="launchDeal('a36')">
       <div class="deal-tag">📱 Mid-Tier Android</div>
-      ${devPick('a36',[{id:'a36',lbl:'Galaxy A36'},{id:'medge',lbl:'edge 2025'},{id:'mgsty',lbl:'g stylus 2025'}])}
+      ${devPick('a36',[{id:'a37',lbl:'Galaxy A37'},{id:'medge',lbl:'edge 2026'},{id:'mgsty',lbl:'g stylus 2025'}])}
       ${ltRow3('a36',['var(--warn)',gc,'var(--indigo)'])}
       <div class="deal-price" style="color:${ltColor(c3.lt)}">${fmt(Math.round(c3otd*100)/100)}</div>
       <div class="deal-sub">${c3.lt==='upgrade'?'Supreme UNL · $90':'Supreme UNL · $45'} APD · Protect</div>
@@ -4410,7 +4446,7 @@ function renderDealStrip(){
     </div>
     <div class="deal-card android" onclick="launchDeal('budget')">
       <div class="deal-tag">📱 Androids Under $300</div>
-      ${devPick('budget',[{id:'mgplay',lbl:'moto g play 2026'},{id:'a16',lbl:'Galaxy A16'},{id:'a17',lbl:'Galaxy A17'}])}
+      ${devPick('budget',[{id:'mg26',lbl:'moto g 2026'},{id:'a16',lbl:'Galaxy A16'},{id:'a17',lbl:'Galaxy A17'}])}
       ${ltRow3('budget',['var(--warn)',gc,'var(--indigo)'])}
       <div class="deal-price" style="color:${ltColor(c5.lt)}">${fmt(Math.round(c5otd*100)/100)}</div>
       <div class="deal-sub">${c5plan?c5plan.full+' · ':''}${c5.lt==='upgrade'?'$60':'$45'} APD · Protect</div>
@@ -4419,11 +4455,20 @@ function renderDealStrip(){
       ${APD_NOTE}
     </div>
     <div class="deal-card select" onclick="launchDeal('select')">
-      <div class="deal-tag" style="color:var(--warn)">⭐ Select Unlimited Deals</div>
-      ${devPick('select',[{id:'mgplay',lbl:'g play 2026'},{id:'icon',lbl:'Icon 2026'},{id:'iconp',lbl:'Icon Plus 2026'}])}
-      ${ltRow2('select',['var(--warn)',gc])}
+      <div class="deal-tag" style="color:var(--warn)">📱 Budget New Line</div>
+      ${devPick('select',[{id:'a16',lbl:'Galaxy A16'},{id:'mg26',lbl:'moto g 2026'},{id:'iconp',lbl:'Icon Plus'}])}
+      <div style="display:flex;align-items:center;gap:4px;margin-bottom:4px;flex-wrap:nowrap">
+        <div onclick="event.stopPropagation()" style="display:inline-flex;gap:0;border:1px solid var(--bd2);border-radius:20px;overflow:hidden;cursor:pointer">
+          ${ltBtn('select','SW','switcher','var(--warn)')}
+          ${ltBtn('select','NEW','new',gc)}
+        </div>
+        <div onclick="event.stopPropagation()" style="display:inline-flex;gap:0;border:1px solid var(--bd2);border-radius:20px;overflow:hidden;cursor:pointer">
+          <span onclick="event.stopPropagation();setDealPlan('select','select')" style="padding:2px 7px;font-size:9px;font-weight:800;background:${c6.plan!=='smart'?'var(--g)':'transparent'};color:${c6.plan!=='smart'?'#fff':'var(--t3)'};cursor:pointer">Select</span>
+          <span onclick="event.stopPropagation();setDealPlan('select','smart')" style="padding:2px 7px;font-size:9px;font-weight:800;background:${c6.plan==='smart'?'var(--g)':'transparent'};color:${c6.plan==='smart'?'#fff':'var(--t3)'};cursor:pointer">Smart</span>
+        </div>
+      </div>
       <div class="deal-price" style="color:${ltColor(c6.lt)}">${fmt(Math.round(c6otd*100)/100)}</div>
-      <div class="deal-sub">${c6name} · $40 Select UNL · Protect</div>
+      <div class="deal-sub">${c6name} · ${c6.plan==='smart'?'Smart UNL':'Select UNL'} · Protect</div>
       <div style="font-size:8px;margin-top:2px;opacity:0">·</div>
       ${c6pr>=149.99?pppSub(c6pr,0):pppNone(c6pr)}
       ${APD_NOTE}
@@ -4433,7 +4478,7 @@ function renderDealStrip(){
 
 function resetAll(){
   if(_sessionQuote) _sessionQuote+=('|[R]|'); _lastQuoteStr='';
-  S={acct:'new',plan:'supreme',ap:true,aalPlan:'supreme',aalLines:1,txnType:'aal',apoPerDevice:0,apoFin:false,apoSplit:false,apoLeaseAmt:0,finOn:false,finType:'prog',breadAPR:9.99,progFreq:'monthly',lines:[],nid:1};
+  S={acct:'new',plan:'supreme',ap:true,aalPlan:'supreme',aalLines:1,txnType:'aal',apoPerDevice:0,apoFin:false,apoSplit:false,apoLeaseAmt:0,finOn:false,finType:'prog',breadAPR:9.99,breadMonths:24,progFreq:'monthly',lines:[],nid:1};
   const _rb=$('btn-new'),_ra=$('btn-aal');
   if(_rb)_rb.classList.add('active');
   if(_ra)_ra.classList.remove('active');
@@ -4520,12 +4565,13 @@ function launchDeal(type){
   } else if(type==='select'){
     const d=_DL.select;
     const ph=PHONES.find(p=>p.id===d.dev);
-    setAcct('new'); setPlan(sel);
+    const launchPlanId=d.plan==='smart'?'smart':'select';
+    setAcct('new'); setPlan(launchPlanId);
     S.ap=true; $('ap-chk').checked=true;
     addLine('v');
     const l=S.lines[0]; l.lt=d.lt; l.device=d.dev;
     l.protect=true; l.protectTier=ph?protectCost(ph.frp):8;
-    renderPlanGrid();
+    renderPlanGrid(); update();
   }
   renderLines(); update();
   setTimeout(()=>{const isUp=S.acct==='aal';const _ps=document.getElementById(isUp?'aal-sec':'plan-sec');if(_ps){const y=_ps.getBoundingClientRect().top+window.scrollY-80;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});}},50);
@@ -4657,7 +4703,7 @@ function calc(){
     progPayment=roundedPayment;
     progLastPayment=+(progTotal-(roundedPayment*(divisor-1))).toFixed(2);
     breadTotal=finBase*(1+TAX);
-    {const r=S.breadAPR/100/12;breadMo=r>0?breadTotal*r*Math.pow(1+r,24)/(Math.pow(1+r,24)-1):breadTotal/24;}
+    {const bm=S.breadMonths||24;const r=S.breadAPR/100/12;breadMo=r>0?breadTotal*r*Math.pow(1+r,bm)/(Math.pow(1+r,bm)-1):breadTotal/bm;}
   }
 
   // Watch incentives — new purchased watches only (not BYOD, not upgrades)
@@ -4848,7 +4894,7 @@ function update(){
       const bread14Total=Math.round(bread14Mo*24*100)/100;
       const approvalAmt2=breadTotal;
       approvalAmt.textContent=fmt(approvalAmt2);
-      approvalSub.textContent='Incl. tax · '+S.breadAPR.toFixed(2)+'% APR · 24 months';
+      approvalSub.textContent='Incl. tax · '+S.breadAPR.toFixed(2)+'% APR · '+(S.breadMonths||24)+' months';
     }
   } else if(approvalDisp){
     approvalDisp.style.display='none';
@@ -4939,9 +4985,10 @@ function renderSummary(c){
       <div class="sr"><span class="sl">10% lease fee + 8.25% tax</span><span class="sv o">+${fmt(c.progFeeAmt)}</span></div>
       <div class="sr"><span class="sl">Total lease amount</span><span class="sv">${fmt(c.progTotal)}</span></div>`;
     } else {
-      const aprLbl=S.breadAPR.toFixed(2)+'% APR · 24 months';
+      const aprLbl=S.breadAPR.toFixed(2)+'% APR · '+(S.breadMonths||24)+' months';
       pppHtml=`<div class="ppp-card bread">
-        <div class="ppp-lbl">Bread Pay · ${aprLbl}</div>
+        <div class="ppp-lbl">Apply via Aktivate</div>
+        <div class="ppp-sub" style="margin-top:2px">Updated terms include variable APR and flexible term lengths.</div>
         <div class="ppp-val">${fmtMo(c.breadMo)}</div>
         <div class="ppp-sub">Approval Needed: ${fmt(c.breadTotal)} (incl. tax)</div>
         <div class="ppp-sub">24-Month Cost: ${fmt(c.breadTotal)}</div>
@@ -5338,9 +5385,9 @@ function showDMCard(){
           <!-- Bread: 2 columns -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
             <div style="${tileStyle('#3b82f6')}">
-              ${lbl('Bread Pay '+S.breadAPR.toFixed(2)+'% APR','#3b82f6')}
-              ${val('$'+bread0Mo.toFixed(2)+'/mo')}
-              ${sub2('Approval Needed: '+fmt(fbWithTax)+'<br>24-Month Cost: '+fmt(bread0Total)+'<br>Est. tax: '+fmt(fbTax)+' (8.25%)<br>APR: 0%')}
+              ${lbl('Bread Pay '+S.breadAPR.toFixed(2)+'% · '+(S.breadMonths||24)+'mo','#3b82f6')}
+              ${val('$'+(c.breadMo||0).toFixed(2)+'/mo')}
+              ${sub2('Approval Needed: '+fmt(fbWithTax)+'<br>24-Month Cost: '+fmt(breadTotal)+'<br>Est. tax: '+fmt(fbTax)+' (8.25%)<br>APR: 9.99%')}
             </div>
             <div style="${tileStyle('#6366f1')}">
               
@@ -5514,7 +5561,7 @@ function copyDMCard(){
     const r=(S&&S.breadAPR||9.99)/100/12;
     const bread14=Math.ceil(bt0*r*Math.pow(1+r,24)/(Math.pow(1+r,24)-1)*100)/100;
     txt+=`Progressive: $${progMo.toFixed(2)}/mo x3\n`;
-    txt+=`Bread 0%: $${bread0.toFixed(2)}/mo x24\n`;
+    txt+=`Bread ${S.breadAPR.toFixed(2)}% ${S.breadMonths||24}mo: $${breadMo.toFixed(2)}/mo\n`;
     txt+=`Bread ${S.breadAPR.toFixed(2)}%: $${breadMo.toFixed(2)}/mo x24\n`;
   }
   if(apoTotal+skeiwatchTotal>0) txt+=`Accessories: ${fmt(apoTotal+skeiwatchTotal)}\n`;
@@ -7701,10 +7748,10 @@ const DSR_MONTHS = [
   {key:'may2026',   label:'May 2026'},
   {key:'april2026', label:'April 2026'},
 ]; // fallback — overwritten by months_fetch on load
-let _dsrActiveMonth    = 'july2026';
+let _dsrActiveMonth    = 'august2026';
 let DSR_DAYS_IN_MONTH  = 31;
-let DSR_MONTH_LABEL    = 'July 2026';
-let DSR_MONTH_KEY      = 'july2026';
+let DSR_MONTH_LABEL    = 'August 2026';
+let DSR_MONTH_KEY      = 'august2026';
 
 // Store goals — all zeroed, populated entirely by goals_fetch from sheet
 const DSR_GOALS = {
@@ -7763,7 +7810,7 @@ function dsrBarSec(label, val, goal, minVal, color, srcType, rawVal){
   const isDollar = typeof val==='string' && val.startsWith('$');
   const barW = goal>0 ? Math.min(100,Math.round(numVal/goal*100)) : 0;
   const minW = (minVal!=null&&goal>0) ? Math.round(minVal/goal*100) : null;
-  const minPct = (minVal!=null&&goal>0) ? Math.round(minVal/goal*100)+'%' : '90%';
+  const minPct = (minVal!=null&&goal>0) ? Math.round(minVal/goal*100)+'%' : '85%';
   const goalDisplay = goal>0 ? (isDollar?'Goal $'+Math.round(goal).toLocaleString('en-US'):'Goal '+goal) : '—';
   const minDisplay  = minVal!=null ? (isDollar?'Min $'+Math.round(minVal).toLocaleString('en-US')+' ('+minPct+')':'Min '+minVal+' ('+minPct+')') : null;
   const dispVal = val;
@@ -7828,7 +7875,7 @@ function dsrNeedTile(label, mtd, goal, goal85, srcType, floorLabel){
   const rem = Math.max(1, DSR_DAYS_IN_MONTH - _dsrDaysElapsed);
   const need100 = goal>0 ? Math.ceil(Math.max(0,goal-mtd)/rem*10)/10 : 0;
   const need85  = goal85!=null&&goal85>0 ? Math.ceil(Math.max(0,goal85-mtd)/rem*10)/10 : null;
-  const flLbl   = floorLabel || (goal85!=null&&goal>0 ? 'to '+Math.round(goal85/goal*100)+'%' : 'to 90%');
+  const flLbl   = floorLabel || (goal85!=null&&goal>0 ? 'to '+Math.round(goal85/goal*100)+'%' : 'to 85%');
   const c100 = need100===0?'var(--ok)':need100<=3?'var(--warn)':'var(--err)';
   const c85  = need85!=null?(need85===0?'var(--ok)':need85<=3?'var(--warn)':'var(--err)'):'';
   if(need85===null){
@@ -7953,7 +8000,7 @@ function dsrBuildStoreList(){
     const opps = (md.voice||0)+(md.upg||0);
     const g = DSR_GOALS[s.id]||{};
     const proj = g.oppsGoal>0?Math.round(opps/_dsrDaysElapsed*DSR_DAYS_IN_MONTH):0;
-    const risk = g.oppsGoal>0 && proj < Math.ceil(g.oppsGoal*0.90); // RSM: 90% floor
+    const risk = g.oppsGoal>0 && proj < Math.ceil(g.oppsGoal*0.85); // RSM: 85% floor
     const active = s.id===_dsrStoreId;
     return `<div onclick="dsrSelectStore(${s.id})" style="padding:10px 14px;border-bottom:1px solid var(--bd);cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:${active?'rgba(0,169,79,.08)':'transparent'};border-left:3px solid ${active?'var(--g)':'transparent'}">
       <div>
@@ -8184,7 +8231,7 @@ function dsrRenderStore(storeId){
 
   const voice= md.voice||0, upg=md.upg||0, opps=voice+upg;
   const actsGoal=goals.actsGoal||0, upgGoal=goals.upgGoal||0, oppsGoal=goals.oppsGoal||0;
-  const oppsFloor=oppsGoal>0?Math.ceil(oppsGoal*0.90):0; // RSM: 90% floor to get any opps payout
+  const oppsFloor=oppsGoal>0?Math.ceil(oppsGoal*0.85):0; // RSM: 85% floor to get any opps payout
   const projVoice=dsrProj(voice), projUpg=dsrProj(upg), projOpps=dsrProj(opps);
   const penRisk=oppsGoal>0&&projOpps<oppsFloor;
   const accGoal=35*oppsGoal;
@@ -8224,7 +8271,7 @@ function dsrRenderStore(storeId){
       <div style="font-size:16px;flex-shrink:0">${penRisk?'⚠️':''}</div>
       <div>
         <div style="font-size:12px;font-weight:900;color:${penRisk?'#7F1D1D':'#14532D'};font-family:'DM Sans'">${penRisk?'Penalty Risk — Proj '+projOpps+' Opps':'On Track — Proj '+projOpps+' Opps'}</div>
-        <div style="font-size:13px;color:${penRisk?'#991B1B':'#166534'};margin-top:2px;font-family:'DM Sans'">90% floor is ${oppsFloor} · ${penRisk?'Need '+((oppsFloor-opps)/Math.max(1,DSR_DAYS_IN_MONTH-_dsrDaysElapsed)).toFixed(1)+'/day to clear':projOpps-oppsFloor+' above floor'}</div>
+        <div style="font-size:13px;color:${penRisk?'#991B1B':'#166534'};margin-top:2px;font-family:'DM Sans'">85% floor is ${oppsFloor} · ${penRisk?'Need '+((oppsFloor-opps)/Math.max(1,DSR_DAYS_IN_MONTH-_dsrDaysElapsed)).toFixed(1)+'/day to clear':projOpps-oppsFloor+' above floor'}</div>
       </div>
     </div>`;
   }
@@ -8233,10 +8280,9 @@ function dsrRenderStore(storeId){
   function dsrStretchBar(label, mtd, goal, stretchTarget, minVal, srcType, minVal2, minVal2Label){
     if(!goal) return dsrBarSec(label,mtd,goal,minVal,dsrGC(mtd,goal*.95,goal*.85),srcType);
     const maxScale = goal*2; // bar represents 200% of goal
-    const color = dsrGC(mtd, goal+stretchTarget, goal);
+    const color = dsrGC(mtd, goal, goal*0.85);
     const barW  = Math.min(100, Math.round(mtd/maxScale*100));
     const goalW = Math.round(goal/maxScale*100);          // 50% position
-    const strW  = Math.round((goal+stretchTarget)/maxScale*100);
     const minW  = minVal!=null ? Math.round(minVal/maxScale*100) : null;
     const minW2 = minVal2!=null ? Math.round(minVal2/maxScale*100) : null;
     const pctOfGoal = goal>0?(mtd/goal*100).toFixed(0):'—';
@@ -8255,14 +8301,13 @@ function dsrRenderStore(storeId){
         <div style="position:relative;background:var(--s3);border-radius:5px;height:12px">
           <div style="position:absolute;left:0;top:0;height:12px;border-radius:5px;background:${color};width:${barW}%;transition:width .5s"></div>
           <div style="position:absolute;top:0;height:100%;width:2px;background:rgba(0,0,0,.35);left:${goalW}%"></div>
-          <div style="position:absolute;top:-3px;height:18px;width:2px;background:#F59E0B;border-radius:1px;left:${strW}%"></div>
+
           ${minW!=null?`<div style="position:absolute;top:0;height:100%;width:2px;background:rgba(239,68,68,.7);left:${minW}%"></div>`:''}
           ${minW2!=null?`<div style="position:absolute;top:0;height:100%;width:2px;background:rgba(245,158,11,.8);left:${minW2}%"></div>`:''}
         </div>
         <div style="display:flex;gap:10px;margin-top:5px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--t3)"><div style="width:7px;height:7px;border-radius:2px;background:rgba(0,0,0,.25)"></div>Goal ${goal}</div>
-          <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#F59E0B;font-weight:800"><div style="width:7px;height:7px;border-radius:2px;background:#F59E0B"></div>${goal+stretchTarget} (+${stretchTarget} Target)</div>
-          ${minVal!=null?`<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--err);font-weight:700"><div style="width:7px;height:7px;border-radius:2px;background:rgba(239,68,68,.7)"></div>Min ${minVal} (90%)</div>`:''}
+          ${minVal!=null?`<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--err);font-weight:700"><div style="width:7px;height:7px;border-radius:2px;background:rgba(239,68,68,.7)"></div>Min ${minVal} (85%)</div>`:''}
           ${minVal2!=null&&_dsrDMMode&&_pendingUid==='ji2646dm'?`<div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#B45309;font-weight:700"><div style="width:7px;height:7px;border-radius:2px;background:rgba(245,158,11,.8)"></div>${minVal2Label||'My Floor'} ${minVal2} (85%)</div>`:''}
         </div>
         ${dsrSrc(srcType)}
@@ -8271,10 +8316,10 @@ function dsrRenderStore(storeId){
   }
 
   html+=dsrGrid2(
-    dsrStretchBar('Voice Activations MTD',voice,actsGoal,5,null,'smd'),
-    dsrStretchBar('Upgrades MTD',upg,upgGoal,5,null,'smd')
+    dsrStretchBar('Voice Activations MTD',voice,actsGoal,0,null,'smd'),
+    dsrStretchBar('Upgrades MTD',upg,upgGoal,0,null,'smd')
   );
-  html+=dsrStretchBar('OPPs MTD (Voice + Upgrades)',opps,oppsGoal,10,oppsFloor>0?oppsFloor:null,'smd',
+  html+=dsrStretchBar('OPPs MTD (Voice + Upgrades)',opps,oppsGoal,0,oppsFloor>0?oppsFloor:null,'smd',
     _pendingUid==='ji2646dm'&&oppsGoal>0&&_dsrDMMode?Math.ceil(oppsGoal*0.85):null,'My Floor');
 
   // Proj tiles — 3-col
@@ -8289,7 +8334,7 @@ function dsrRenderStore(storeId){
   html+=`<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
     ${dsrNeedTile('Activations Need/Day',voice,actsGoal,null,'smd')}
     ${dsrNeedTile('Upgrades Need/Day',upg,upgGoal,null,'smd')}
-    ${dsrNeedTile('OPPs Need/Day',opps,oppsGoal,oppsFloor>0?oppsFloor:null,'smd','to 90%')}
+    ${dsrNeedTile('OPPs Need/Day',opps,oppsGoal,oppsFloor>0?oppsFloor:null,'smd','to 85%')}
   </div>`;
 
   // Rates
@@ -8302,7 +8347,7 @@ function dsrRenderStore(storeId){
     dsrRateSec('60+ RP Mix',md.rpm60||0,0.80,null,'smd')
   );
   html+=dsrGrid2(
-    dsrRateSec('Upgrade Plus',md.upgPlusRate||0,0.08,null,'smd'),
+    dsrRateSec('Upgrade Plus',md.upgPlusRate||0,0.20,null,'smd'),
     dsrRateSec('Intl. Long Distance',md.ildRate||0,0.02,null,'smd')
   );
 
@@ -8395,9 +8440,9 @@ function dsrRenderStore(storeId){
     const _misses   = [_qAP,_qProt,_qInet].filter(q=>!q).length;
     const _qualMult = Math.max(0, 1 - _misses*0.10);
 
-    // Opps payout — RSM floor is 90%
-    const _oppsBelowFloor = oppsGoal>0&&_oppsPct<0.90;
-    const _oppsAtFloor    = Math.ceil(oppsGoal*0.90);
+    // Opps payout — RSM floor is 85%
+    const _oppsBelowFloor = oppsGoal>0&&_oppsPct<0.85;
+    const _oppsAtFloor    = Math.ceil(oppsGoal*0.85);
     const _oppsBuckets    = Math.round((_oppsPct - 1.0) / 0.05);
     const _rsmOppsFull    = oppsGoal>0 ? Math.min(_tc.base*2, Math.max(0, _tc.base + _oppsBuckets*_tc.step)) : 0;
     const _rsmOppsRaw     = _oppsBelowFloor ? 0 : _rsmOppsFull;
@@ -8437,7 +8482,7 @@ function dsrRenderStore(storeId){
 
     const _rsmPayHtml = `
       <div style="padding:8px 12px;background:var(--s2);border-bottom:1px solid var(--bd)">
-        <div style="font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--t3);font-family:'DM Sans'">Store Opps · Tier ${_tierNum} (${oppsGoal>0?_oppsPct>=0.90?(((_oppsPct)*100).toFixed(0)+'% of goal'):'⚠ Below 90% floor':'No goal'})</div>
+        <div style="font-size:11px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--t3);font-family:'DM Sans'">Store Opps · Tier ${_tierNum} (${oppsGoal>0?_oppsPct>=0.85?(((_oppsPct)*100).toFixed(0)+'% of goal'):'⚠ Below 85% floor':'No goal'})</div>
       </div>
       ${_oppsBelowFloor
         ? `<div style="padding:9px 12px;border-bottom:1px solid var(--bd);background:#FEF2F2">
@@ -8448,10 +8493,10 @@ function dsrRenderStore(storeId){
                 <span style="font-size:11px;font-weight:900;color:#EF4444;background:#FEE2E2;border:1px solid #FECACA;border-radius:4px;padding:2px 6px">FORFEITED</span>
               </div>
             </div>
-            <div style="font-size:11px;color:#B91C1C;font-family:'DM Sans';margin-bottom:6px">Below 90% floor · need ${_oppsAtFloor-opps} more opps to unlock · ${opps}/${oppsGoal} (${((opps/oppsGoal)*100).toFixed(0)}% of goal)</div>
+            <div style="font-size:11px;color:#B91C1C;font-family:'DM Sans';margin-bottom:6px">Below 85% floor · need ${_oppsAtFloor-opps} more opps to unlock · ${opps}/${oppsGoal} (${((opps/oppsGoal)*100).toFixed(0)}% of goal)</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px">
               <div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:6px;padding:6px 8px;text-align:center">
-                <div style="font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#991B1B;font-family:'DM Sans'">90% Floor Pays</div>
+                <div style="font-size:9px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#991B1B;font-family:'DM Sans'">85% Floor Pays</div>
                 <div style="font-family:'Bebas Neue';font-size:20px;color:#B91C1C">$${Math.min(_tc.base*2,Math.max(0,_tc.base+Math.round((_oppsAtFloor/oppsGoal-1.0)/0.05)*_tc.step))}</div>
                 <div style="font-size:9px;color:#991B1B;font-family:'DM Sans'">${_oppsAtFloor} opps needed</div>
               </div>
@@ -8499,7 +8544,7 @@ function dsrRenderStore(storeId){
       ${_qRow(`Protect ${((md.protect||0)*100).toFixed(1)}% · need ≥48%`,_qProt)}
       ${_qRow(`Internet ${internetTotal} · need ≥3`,_qInet)}
       ${_lostRow('Lost to Opps Floor',
-        `Need ${_oppsAtFloor} opps (90%) to unlock · ${opps} OPPs right now · ${oppsGoal-opps} needed for 100%`,
+        `Need ${_oppsAtFloor} opps (85%) to unlock · ${opps} OPPs right now · ${oppsGoal-opps} needed for 100%`,
         _lostOppsFloor
       )}
       ${_lostRow('Lost to Qualifier Misses',
@@ -8771,7 +8816,7 @@ function dsrRenderDM(){
   // Rates
   html+=dsrGrid2(dsrRateSec('AutoPay',distAP,0.30,0.28,'smd'),dsrRateSec('Protect',distProt,0.50,0.48,'smd'));
   html+=dsrGrid2(dsrRateSec('PPP',distPPP,0.20,0.10,'smd'),dsrRateSec('60+ RP Mix',distRPM,0.80,null,'smd'));
-  html+=dsrGrid2(dsrRateSec('Upgrade Plus',distUpgPlus,0.08,null,'smd'),dsrRateSec('Intl. Long Distance',distILD,0.02,null,'smd'));
+  html+=dsrGrid2(dsrRateSec('Upgrade Plus',distUpgPlus,0.20,null,'smd'),dsrRateSec('Intl. Long Distance',distILD,0.02,null,'smd'));
 
   // Accessory Revenue + Internet side by side
   const inetChipColor = inetPerDoor>=2?'var(--ok)':inetPerDoor>=1?'var(--warn)':'var(--err)';
@@ -8854,7 +8899,7 @@ function dsrRenderDM(){
     const opps=(md.voice||0)+(md.upg||0);
     const g=DSR_GOALS[s.id]||{};
     const oppsProj=dsrProj(opps);
-    const floor=g.oppsGoal?Math.ceil(g.oppsGoal*0.90):0; // RSM: 90% floor
+    const floor=g.oppsGoal?Math.ceil(g.oppsGoal*0.85):0; // RSM: 85% floor
     const risk=g.oppsGoal&&oppsProj<floor;
     const hasDSRS=_dsrDSRData&&_dsrDSRData[s.id];
     const yoyA=hasDSRS&&dsrS.actsYoY!=null?dsrS.actsYoY:null;
@@ -8946,7 +8991,7 @@ function dsrRenderDM(){
       </div>
       <!-- Upg Plus / ILD / Internet / Bill Pays -->
       <div style="padding:0 10px 8px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
-        ${tile('Upg Plus',((md.upgPlusRate||0)*100).toFixed(1)+'%','Goal ≥8%',(md.upgPlusRate||0)>=0.08?'var(--ok)':(md.upgPlusRate||0)>=0.05?'var(--warn)':'var(--err)')}
+        ${tile('Upg Plus',((md.upgPlusRate||0)*100).toFixed(1)+'%','Goal ≥20%',(md.upgPlusRate||0)>=0.20?'var(--ok)':(md.upgPlusRate||0)>=0.10?'var(--warn)':'var(--err)')}
         ${tile('ILD',((md.ildRate||0)*100).toFixed(1)+'%','Goal ≥2%',(md.ildRate||0)>=0.02?'var(--ok)':(md.ildRate||0)>=0.01?'var(--warn)':'var(--err)')}
         ${tile('Internet',inetTotal,'AIA + Fiber',inetTotal>=3?'var(--ok)':inetTotal>=1?'var(--warn)':'var(--err)')}
         ${tile('Bill Pays',md.billPay||0,'MTD','var(--t1)')}
