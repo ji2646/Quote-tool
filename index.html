@@ -851,11 +851,11 @@ const ALLOWED_UIDS=[
   'gs0426','ap485d','mg221k','tg4507',
   'jq6635','jv6394','jq286d','cx7250',
   'bb8326','jx820u','ji2646dm','sc417e','ju512j','ec651n',
-  'et7967'
+  'et7967','db938m'
 ];
 
 const DISABLED_UIDS=[];
-const QTOOL_DISABLED_UIDS=[];
+const QTOOL_DISABLED_UIDS=['db938m'];
 const ADMIN_DISABLED_UIDS=['dg8674','rg8855','ec934j','nc3647']; // account disabled by admin
 
 const UID_NAMES={
@@ -864,7 +864,7 @@ const UID_NAMES={
   'jv6394':'Joseph Cisneros','sc417e':'Sergio Cardenas','jq286d':'Josue Sosa',
   'cx7250':'Christina Muzquiz','bb8326':'Bryan Barajas',
   'jx820u':'Jose Manzo','ju512j':'Jonatan Ramirez','ec651n':'Erica Culbert',
-  'ji2646dm':'Josue Garcia','et7967':'Evelyn Tellez',
+  'ji2646dm':'Josue Garcia','et7967':'Evelyn Tellez','db938m':'Diego Barragan',
   'tbd752':'Store 752 (TBD)',
 };
 function fullName(uid){ return UID_NAMES[uid]||uid; }
@@ -1211,7 +1211,7 @@ const ACTIVITY_CREDS={
 
 // Activity store -> rep UIDs
 const STORE_REPS={
-  '777':null, // Jaquelin sees all
+  '777':['jv6394','et7967','db938m'], // Joseph, Evelyn, db938m
   '747':['gs0426','ap485d','tg4507'],           // Gabbi + Alfredo + Thalia
   '775':['mg221k','ec651n'],                // Matthew + Erica
   '769':['bb8326'],                         // Christina RSM + Bryan RSC
@@ -1225,7 +1225,7 @@ const STORE_REPS={
 
 // RSM team map for dashboard filter: rsm uid → their reps (including themselves)
 const RSM_TEAM_MAP={
-  'jq6635':['jq6635','jv6394','et7967'],           // Jaquelin — store 777: Joseph, Evelyn
+  'jq6635':['jq6635','jv6394','et7967','db938m'],   // Jaquelin — store 777: Joseph, Evelyn, db938m
   'gs0426':['gs0426','ap485d','tg4507'],
   'mg221k':['mg221k','ec651n'],
   'jq286d':['jq286d','sc417e'],                // Josue Sosa RSM + Sergio RSC
@@ -9212,8 +9212,8 @@ const STORES = {
     ],
     info:[
       { label:'Location ID', val:'80193747' },
-      { label:'Phone Number',      val:'—', phone:false },
-      { label:'Email',             val:'—', email:false },
+      { label:'Phone', val:'(409) 833-9200', phone:true },
+      { label:'Email', val:'BeaumontCollegeStTX@suncommobile.com', email:true },
       { label:'Mozeus Region Code', val:'807798020361' },
       { label:'Mozeus PIN',        val:'iusp', mono:true },
       { label:'AC Filter Size', val:'20×20×1' },
