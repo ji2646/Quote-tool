@@ -841,7 +841,7 @@ html.dark-mode .wchip-past .wlbl{color:#5a5a5a !important}
     </div>
     <span style="font-size:10px;color:#9CA3AF;font-weight:600">Dark</span>
   </div>
-  <div style="position:absolute;bottom:calc(20px + env(safe-area-inset-bottom, 20px));left:0;right:0;text-align:center;font-size:10px;color:#9CA3AF;font-family:'DM Sans',sans-serif;letter-spacing:.5px">V-05AUG2026-A1</div>
+  <div style="position:absolute;bottom:calc(20px + env(safe-area-inset-bottom, 20px));left:0;right:0;text-align:center;font-size:10px;color:#9CA3AF;font-family:'DM Sans',sans-serif;letter-spacing:.5px">V-11AUG2026-A1</div>
 </div>
 
 <script>
@@ -851,11 +851,11 @@ const ALLOWED_UIDS=[
   'gs0426','ap485d','mg221k','tg4507',
   'jq6635','jv6394','jq286d','cx7250',
   'bb8326','jx820u','ji2646dm','sc417e','ju512j','ec651n',
-  'et7967','db938m'
+  'et7967'
 ];
 
 const DISABLED_UIDS=[];
-const QTOOL_DISABLED_UIDS=['db938m'];
+const QTOOL_DISABLED_UIDS=[];
 const ADMIN_DISABLED_UIDS=['dg8674','rg8855','ec934j','nc3647']; // account disabled by admin
 
 const UID_NAMES={
@@ -864,7 +864,7 @@ const UID_NAMES={
   'jv6394':'Joseph Cisneros','sc417e':'Sergio Cardenas','jq286d':'Josue Sosa',
   'cx7250':'Christina Muzquiz','bb8326':'Bryan Barajas',
   'jx820u':'Jose Manzo','ju512j':'Jonatan Ramirez','ec651n':'Erica Culbert',
-  'ji2646dm':'Josue Garcia','et7967':'Evelyn Tellez','db938m':'Diego Barragan',
+  'ji2646dm':'Josue Garcia','et7967':'Evelyn Tellez',
   'tbd752':'Store 752 (TBD)',
 };
 function fullName(uid){ return UID_NAMES[uid]||uid; }
@@ -1211,7 +1211,7 @@ const ACTIVITY_CREDS={
 
 // Activity store -> rep UIDs
 const STORE_REPS={
-  '777':['jv6394','et7967','db938m'], // Joseph, Evelyn, db938m
+  '777':null, // Jaquelin sees all
   '747':['gs0426','ap485d','tg4507'],           // Gabbi + Alfredo + Thalia
   '775':['mg221k','ec651n'],                // Matthew + Erica
   '769':['bb8326'],                         // Christina RSM + Bryan RSC
@@ -1225,7 +1225,7 @@ const STORE_REPS={
 
 // RSM team map for dashboard filter: rsm uid → their reps (including themselves)
 const RSM_TEAM_MAP={
-  'jq6635':['jq6635','jv6394','et7967','db938m'],   // Jaquelin — store 777: Joseph, Evelyn, db938m
+  'jq6635':['jq6635','jv6394','et7967'],           // Jaquelin — store 777: Joseph, Evelyn
   'gs0426':['gs0426','ap485d','tg4507'],
   'mg221k':['mg221k','ec651n'],
   'jq286d':['jq286d','sc417e'],                // Josue Sosa RSM + Sergio RSC
@@ -3363,7 +3363,7 @@ if(typeof showToast==='undefined'){
 </div>
 <header>
   <div class="hlogo">
-    <div><div class="htitle">Quote Tool</div><div class="hsub">Pricing effective 8/5/2026</div></div>
+    <div><div class="htitle">Quote Tool</div><div class="hsub">Pricing effective 8/11/2026</div></div>
   </div>
   <div style="display:flex;align-items:center;gap:8px">
     <button class="hdr-refresh" onclick="location.reload()" title="Reload page"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></button>
@@ -3621,9 +3621,9 @@ const PHONES=[
   {id:'i16_128', n:'iPhone 16 128GB',      sw:729.99, nw:729.99,  up:729.99,  frp:729.99,  brand:'Apple',    promoReq:'any'},
   {id:'i16_256', n:'iPhone 16 256GB',      sw:829.99, nw:829.99,  up:829.99,  frp:829.99,  brand:'Apple',    promoReq:'any'},
   {id:'i16_512', n:'iPhone 16 512GB',      sw:1029.99,nw:1029.99, up:1029.99, frp:1029.99, brand:'Apple',    promoReq:'any'},
-  {id:'i16e_128',n:'iPhone 16e 128GB',     sw:79.99,  nw:249.99,  up:599.99,  sw_o:249.99, nw_o:349.99, up_o:599.99,  frp:599.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
-  {id:'i16e_256',n:'iPhone 16e 256GB',     sw:149.99, nw:299.99,  up:699.99,  sw_o:349.99, nw_o:449.99, up_o:699.99,  frp:699.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
-  {id:'i16e_512',n:'iPhone 16e 512GB',     sw:349.99, nw:499.99,  up:899.99,  sw_o:499.99, nw_o:649.99, up_o:899.99,  frp:899.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
+  {id:'i16e_128',n:'iPhone 16e 128GB',     sw:29.99,  nw:99.99,   up:599.99,  sw_o:249.99, nw_o:349.99, up_o:599.99,  frp:599.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
+  {id:'i16e_256',n:'iPhone 16e 256GB',     sw:79.99,  nw:149.99,  up:699.99,  sw_o:349.99, nw_o:449.99, up_o:699.99,  frp:699.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
+  {id:'i16e_512',n:'iPhone 16e 512GB',     sw:149.99, nw:249.99,  up:899.99,  sw_o:499.99, nw_o:649.99, up_o:899.99,  frp:899.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
   {id:'i17e_256',n:'iPhone 17e 256GB',     sw:299.99, nw:399.99,  up:599.99,  sw_o:399.99, nw_o:499.99, up_o:599.99,  frp:599.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
   {id:'i17e_512',n:'iPhone 17e 512GB',     sw:499.99, nw:599.99,  up:799.99,  sw_o:599.99, nw_o:699.99, up_o:799.99,  frp:799.99,  brand:'Apple',    promoReq:'supreme', maxLines:4},
   {id:'i17_256', n:'iPhone 17 256GB',      sw:829.99, nw:829.99,  up:829.99,  frp:829.99,  brand:'Apple',    promoReq:'any'},
@@ -3641,7 +3641,7 @@ const PHONES=[
   // Samsung
   {id:'a16',    n:'Galaxy A16',            sw:0,      nw:0,       up:79.99,   sw_o:79.99,  nw_o:79.99,  up_o:79.99,   frp:159.99,  brand:'Samsung',  promoReqSw:'supreme', promoReqNw:'supreme', maxLinesNw:4},
   {id:'a17',    n:'Galaxy A17',            sw:0,      nw:19.99,   up:109.99,  sw_o:109.99, nw_o:109.99, up_o:109.99,  frp:179.99,  brand:'Samsung',  promoReq:'supreme', maxLinesNw:4},
-  {id:'a37',    n:'Galaxy A37',            sw:49.99,  nw:129.99,  up:249.99,  sw_o:199.99, nw_o:199.99, up_o:249.99,  frp:404.99,  brand:'Samsung',  promoReqSw:'supreme', promoReqNw:'supreme', maxLines:4},
+  {id:'a37',    n:'Galaxy A37',            sw:19.99,  nw:49.99,   up:249.99,  sw_o:199.99, nw_o:199.99, up_o:249.99,  frp:404.99,  brand:'Samsung',  promoReqSw:'supreme', promoReqNw:'supreme', maxLines:4},
   {id:'s25fe',  n:'Galaxy S25 FE',         sw:149.99, nw:199.99,  up:649.99,  sw_o:399.99, nw_o:399.99, up_o:649.99,  frp:649.99,  brand:'Samsung',  promoReq:'supreme', maxLines:4},
   {id:'s25',    n:'Galaxy S25',            sw:360,    nw:360,     up:799.99,  sw_o:499.99, nw_o:499.99, up_o:799.99,  frp:799.99,  brand:'Samsung',  promoReq:'supreme'},
   {id:'s26',    n:'Galaxy S26',            sw:399.99, nw:499.99,  up:899.99,  sw_o:699.99, nw_o:699.99, up_o:899.99,  frp:899.99,  brand:'Samsung',  promoReq:'supreme', maxLines:4},
@@ -3651,7 +3651,8 @@ const PHONES=[
   {id:'mg26',   n:'moto g 2026',           sw:0,      nw:0,       up:89.99,   sw_o:29.99,  nw_o:29.99,  up_o:89.99,   frp:169.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
   {id:'mgpwr',  n:'moto g power 2026',     sw:0,      nw:9.99,    up:199.99,  sw_o:59.99,  nw_o:59.99,  up_o:199.99,  frp:199.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
   {id:'mgsty',  n:'moto g stylus 2025',    sw:29.99,  nw:39.99,   up:149.99,  sw_o:69.99,  nw_o:69.99,  up_o:149.99,  frp:239.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
-  {id:'medge',  n:'motorola edge 2026',    sw:59.99,  nw:149.99,  up:429.99,  sw_o:129.99, nw_o:199.99, up_o:429.99,  frp:429.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
+  {id:'medge',  n:'motorola edge 2026',    sw:19.99,  nw:49.99,   up:429.99,  sw_o:129.99, nw_o:199.99, up_o:429.99,  frp:429.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
+  {id:'medge25', n:'motorola edge 2025',    sw:29.99,  nw:99.99,   up:199.99,  sw_o:129.99, nw_o:199.99, up_o:199.99,  frp:359.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
   {id:'razr',   n:'motorola razr 2025',    sw:149.99, nw:149.99,  up:399.99,  sw_o:399.99, nw_o:399.99, up_o:399.99,  frp:599.99,  brand:'Motorola', promoReq:'supreme', maxLines:4},
   // Cricket
   {id:'iconp',  n:'Icon Plus 2026',        sw:0,      nw:0,       up:69.99,   sw_o:29.99,  nw_o:29.99,  up_o:69.99,   frp:109.99,  brand:'Cricket',  promoReq:'smart',   maxLinesNw:4},
@@ -4543,7 +4544,7 @@ function renderDealStrip(){
     </div>
     <div class="deal-card android" onclick="launchDeal('a36')">
       <div class="deal-tag">📱 Mid-Tier Android</div>
-      ${devPick('a36',[{id:'a37',lbl:'Galaxy A37'},{id:'medge',lbl:'edge 2026'},{id:'mgsty',lbl:'g stylus 2025'}])}
+      ${devPick('a36',[{id:'a37',lbl:'Galaxy A37'},{id:'medge',lbl:'edge 2026 ⚠️'},{id:'medge25',lbl:'edge 2025'},{id:'mgsty',lbl:'g stylus 2025'}])}
       ${ltRow3('a36',['var(--warn)',gc,'var(--indigo)'])}
       <div class="deal-price" style="color:${ltColor(c3.lt)}">${fmt(Math.round(c3otd*100)/100)}</div>
       <div class="deal-sub">${c3.lt==='upgrade'?'Supreme UNL · $90':'Supreme UNL · $45'} APD · Protect</div>
