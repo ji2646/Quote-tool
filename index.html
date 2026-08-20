@@ -841,7 +841,7 @@ html.dark-mode .wchip-past .wlbl{color:#5a5a5a !important}
     </div>
     <span style="font-size:10px;color:#9CA3AF;font-weight:600">Dark</span>
   </div>
-  <div style="position:absolute;bottom:calc(20px + env(safe-area-inset-bottom, 20px));left:0;right:0;text-align:center;font-size:10px;color:#9CA3AF;font-family:'DM Sans',sans-serif;letter-spacing:.5px">V-11AUG2026-A1</div>
+  <div style="position:absolute;bottom:calc(20px + env(safe-area-inset-bottom, 20px));left:0;right:0;text-align:center;font-size:10px;color:#9CA3AF;font-family:'DM Sans',sans-serif;letter-spacing:.5px">V-14AUG2026-A1</div>
 </div>
 
 <script>
@@ -3359,7 +3359,7 @@ if(typeof showToast==='undefined'){
 </div>
 <header>
   <div class="hlogo">
-    <div><div class="htitle">Quote Tool</div><div class="hsub">Pricing effective 8/11/2026</div></div>
+    <div><div class="htitle">Quote Tool</div><div class="hsub">Pricing effective 8/14/2026</div></div>
   </div>
   <div style="display:flex;align-items:center;gap:8px">
     <button class="hdr-refresh" onclick="location.reload()" title="Reload page"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></button>
@@ -3538,7 +3538,7 @@ if(typeof showToast==='undefined'){
     </div>
     <div id="fin-opts" style="display:none">
       <div class="fin-types">
-        <div class="ftype prog on" id="ft-prog" onclick="setFinType('prog')"><div class="fn">Progressive</div><div class="fd">$49.99 today · 10% lease fee + 8.25% tax · No credit check · Flexible payoff</div></div>
+        <div class="ftype prog on" id="ft-prog" onclick="setFinType('prog')"><div class="fn">Progressive</div><div class="fd">$1.00 today · 10% lease fee + 8.25% tax · No credit check · Flexible payoff</div></div>
         <div class="ftype bread" id="ft-bread" onclick="setFinType('bread')"><div class="fn">Bread Pay</div><div class="fd">Apply via Aktivate · Updated terms include variable APR and flexible term lengths.</div></div>
       </div>
       <div id="apr-sec" style="display:none">
@@ -3592,7 +3592,7 @@ if(typeof showToast==='undefined'){
 // ============================================================
 // CONSTANTS
 // ============================================================
-const TAX=0.0825,PROG_LEASE_FEE=0.10,PROG_FEE=PROG_LEASE_FEE+TAX,PROG_INIT=49.99,WATCH_PLAN=10,WATCH_ACT=25,TABLET_PLAN=15,ACT_FEE=25,SIM_FEE=9.99,INTL_CALL=10,HS_ADD=10;
+const TAX=0.0825,PROG_LEASE_FEE=0.10,PROG_FEE=PROG_LEASE_FEE+TAX,PROG_INIT=1,WATCH_PLAN=10,WATCH_ACT=25,TABLET_PLAN=15,ACT_FEE=25,SIM_FEE=9.99,INTL_CALL=10,HS_ADD=10;
 
 const SKEIWATCHES=[
   {id:'skei_c30',n:'Skeiwatch C30',price:99.99},
@@ -3648,7 +3648,7 @@ const PHONES=[
   {id:'mgpwr',  n:'moto g power 2026',     sw:0,      nw:9.99,    up:199.99,  sw_o:59.99,  nw_o:59.99,  up_o:199.99,  frp:199.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
   {id:'mgsty',  n:'moto g stylus 2025',    sw:29.99,  nw:39.99,   up:149.99,  sw_o:69.99,  nw_o:69.99,  up_o:149.99,  frp:239.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
   {id:'medge',  n:'motorola edge 2026',    sw:19.99,  nw:49.99,   up:429.99,  sw_o:129.99, nw_o:199.99, up_o:429.99,  frp:429.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
-  {id:'medge25', n:'motorola edge 2025',    sw:29.99,  nw:99.99,   up:199.99,  sw_o:129.99, nw_o:199.99, up_o:199.99,  frp:359.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
+  {id:'medge25', n:'motorola edge 2025',    sw:9.99,   nw:49.99,   up:359.99,  sw_o:99.99,  nw_o:199.99, up_o:359.99,  frp:359.99,  brand:'Motorola', promoReq:'supreme', maxLinesNw:4},
   {id:'razr',   n:'motorola razr 2025',    sw:149.99, nw:149.99,  up:399.99,  sw_o:399.99, nw_o:399.99, up_o:399.99,  frp:599.99,  brand:'Motorola', promoReq:'supreme', maxLines:4},
   // Cricket
   {id:'iconp',  n:'Icon Plus 2026',        sw:0,      nw:0,       up:69.99,   sw_o:29.99,  nw_o:29.99,  up_o:69.99,   frp:109.99,  brand:'Cricket',  promoReq:'smart',   maxLinesNw:4},
@@ -4520,17 +4520,17 @@ function renderDealStrip(){
   $('deal-strip').innerHTML=`
     <div class="deal-card iphone" onclick="launchDeal('iphone')">
       <div class="deal-tag">📱 iPhone Deals</div>
-      ${devPick('iphone',[{id:'i16e_128',lbl:'iPhone 16e'},{id:'i15_128',lbl:'iPhone 15'}])}
+      ${devPick('iphone',[{id:'i16e_128',lbl:'iPhone 16e'},{id:'i17e_256',lbl:'iPhone 17e'},{id:'i15_128',lbl:'iPhone 15'}])}
       ${ltRow3('iphone',['var(--warn)',gc,'var(--indigo)'])}
       <div class="deal-price" style="color:${ltColor(c1.lt)}">${fmt(Math.round(c1otd*100)/100)}</div>
-      <div class="deal-sub">Supreme UNL · ${c1.lt==='upgrade'?'$90':'$45'} APD · Protect</div>
+      <div class="deal-sub">Supreme UNL · ${c1.lt==='upgrade'?'$90':'$50'} APD · Protect</div>
       ${c1.lt==='upgrade'?`<div style="font-size:8px;color:var(--g);margin-top:2px;font-weight:700">✓ Qualified Upgrade</div>`:`<div style="font-size:8px;color:#60a5fa;margin-top:2px;opacity:.8">⚠ CHECKID · Max 4 every 3 years</div>`}
       ${c1pr>=149.99?pppSub(c1pr,c1apo):pppNone(c1pr)}
       ${APD_NOTE}
     </div>
     <div class="deal-card iphone" onclick="launchDeal('i17e')">
       <div class="deal-tag">📱 Latest from Apple</div>
-      ${devPick4('i17e',[{id:'iair_256',lbl:'iPhone\nAir'},{id:'i17_256',lbl:'iPhone\n17'},{id:'i17e_256',lbl:'iPhone\n17e'},{id:'i17pm_256',lbl:'17\nPro Max'}])}
+      ${devPick4('i17e',[{id:'iair_256',lbl:'iPhone\nAir'},{id:'i17_256',lbl:'iPhone\n17'},{id:'i17pm_256',lbl:'17\nPro Max'}])}
       ${ltRow3('i17e',['var(--warn)',gc,'var(--indigo)'])}
       <div class="deal-price" style="color:${ltColor(c2.lt)}">${fmt(Math.round(c2otd*100)/100)}</div>
       <div class="deal-sub">${c2is17e?'Supreme UNL · $90':'$130'} APD · Protect</div>
@@ -4540,17 +4540,17 @@ function renderDealStrip(){
     </div>
     <div class="deal-card android" onclick="launchDeal('a36')">
       <div class="deal-tag">📱 Mid-Tier Android</div>
-      ${devPick('a36',[{id:'a37',lbl:'Galaxy A37'},{id:'medge',lbl:'edge 2026 ⚠️'},{id:'medge25',lbl:'edge 2025'},{id:'mgsty',lbl:'g stylus 2025'}])}
+      ${devPick('a36',[{id:'a37',lbl:'Galaxy A37'},{id:'medge25',lbl:'edge 2025'},{id:'mgsty',lbl:'g stylus 2025'}])}
       ${ltRow3('a36',['var(--warn)',gc,'var(--indigo)'])}
       <div class="deal-price" style="color:${ltColor(c3.lt)}">${fmt(Math.round(c3otd*100)/100)}</div>
-      <div class="deal-sub">${c3.lt==='upgrade'?'Supreme UNL · $90':'Supreme UNL · $45'} APD · Protect</div>
+      <div class="deal-sub">${c3.lt==='upgrade'?'Supreme UNL · $90':'Supreme UNL · $50'} APD · Protect</div>
       <div style="font-size:8px;margin-top:2px;opacity:0">·</div>
       ${c3pr>=149.99?pppSub(c3pr,c3.lt==='upgrade'?90:45):pppNone(c3pr)}
       ${APD_NOTE}
     </div>
     <div class="deal-card android" onclick="launchDeal('hiend')">
       <div class="deal-tag">📱 High End Android</div>
-      ${devPick('hiend',[{id:'razr',lbl:'Razr 2025'},{id:'s25',lbl:'Galaxy S25'},{id:'s25fe',lbl:'Galaxy S25 FE'}])}
+      ${devPick('hiend',[{id:'razr',lbl:'Razr 2025'},{id:'s26',lbl:'Galaxy S26'},{id:'s25fe',lbl:'Galaxy S25 FE'}])}
       ${ltRow3('hiend',['var(--warn)',gc,'var(--indigo)'])}
       <div class="deal-price" style="color:${ltColor(c4.lt)}">${fmt(Math.round(c4otd*100)/100)}</div>
       <div class="deal-sub">Supreme UNL · $90 APD · Protect</div>
@@ -4563,7 +4563,7 @@ function renderDealStrip(){
       ${devPick('budget',[{id:'mg26',lbl:'moto g 2026'},{id:'a16',lbl:'Galaxy A16'},{id:'a17',lbl:'Galaxy A17'}])}
       ${ltRow3('budget',['var(--warn)',gc,'var(--indigo)'])}
       <div class="deal-price" style="color:${ltColor(c5.lt)}">${fmt(Math.round(c5otd*100)/100)}</div>
-      <div class="deal-sub">${c5plan?c5plan.full+' · ':''}${c5.lt==='upgrade'?'$60':'$45'} APD · Protect</div>
+      <div class="deal-sub">${c5plan?c5plan.full+' · ':''}${c5.lt==='upgrade'?'$60':'$50'} APD · Protect</div>
       <div style="font-size:8px;margin-top:2px;opacity:0">·</div>
       ${c5pr>=149.99?pppSub(c5pr,c5.lt==='upgrade'?60:45):pppNone(c5pr)}
       ${APD_NOTE}
@@ -4617,7 +4617,7 @@ function launchDeal(type){
   if(type==='iphone'){
     const d=_DL.iphone;
     const ph=PHONES.find(p=>p.id===d.dev);
-    const apo=d.lt==='upgrade'?90:45;
+    const apo=d.lt==='upgrade'?90:50;
     if(d.lt==='upgrade'){ setAcct('aal'); setTxnType('upgrade'); }
     else { setAcct('new'); setPlan(sup); S.ap=true; $('ap-chk').checked=true; }
     S.apoPerDevice=apo; $('apo-inp').value=apo; updateApoTiles(apo);
@@ -4639,7 +4639,7 @@ function launchDeal(type){
     if(d.lt==='upgrade'){ l.upQual=true; }
   } else if(type==='a36'){
     const d=_DL.a36;
-    const apo=d.lt==='upgrade'?90:45;
+    const apo=d.lt==='upgrade'?90:50;
     const ph=PHONES.find(p=>p.id===d.dev);
     if(d.lt==='upgrade'){ setAcct('aal'); setTxnType('upgrade'); }
     else { setAcct('new'); setPlan(sup); S.ap=true; $('ap-chk').checked=true; }
@@ -4661,7 +4661,7 @@ function launchDeal(type){
   } else if(type==='budget'){
     const d=_DL.budget;
     const ph=PHONES.find(p=>p.id===d.dev);
-    const apo=d.lt==='upgrade'?60:45;
+    const apo=d.lt==='upgrade'?60:50;
     if(d.lt==='upgrade'){ setAcct('aal'); setTxnType('upgrade'); }
     else {
       setAcct('new');
